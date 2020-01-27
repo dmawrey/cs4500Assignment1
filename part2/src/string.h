@@ -30,14 +30,23 @@ class String : public Object {
         virtual bool equals(Object* other) {}
 
         /**
-         * Returns the length of the string
-         * @return size_t, represents the length of the string
-         */
-        size_t length() {}
-
-        /**
          * @return The raw value of this string
          */
         const char* value() {}
-
+                                                                                                                                          
+        /** Returns 0 if strings are equal, >0 if this string is larger,               
+        *  <0 otherwise */                                                            
+        int compare(String* tgt) {}                                                                                          
+                                                                                 
+        /** Number of non \0 characters in this string */                              
+        size_t size() {}                                                
+                                                                                 
+        /** Concatenate the strings, return a new object */                            
+        String* concat(String* other) {}                                                                              
+                                                                                 
+        /** Return a newly allocated char* with this string value */                   
+        char* to_string() {}                                  
+                                                                                 
+        /** Print this string on stdout. */                                            
+        void print() {} 
 };
