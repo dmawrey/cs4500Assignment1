@@ -19,7 +19,7 @@ class Object {
          * @param other The object to compare this object to
          * @return true if the other object is equal to this object; false otherwise
          */                                                                             
-        virtual bool equals(Object* other) { return this == other; }                   
+        virtual bool equals(Object* other) { }                   
                                                                                  
         /** Return a newly allocated string describin the object */                    
         virtual char* to_string() {}                      
