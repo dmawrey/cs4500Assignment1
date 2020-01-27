@@ -61,8 +61,8 @@ class ArrayTest : public Test_template {
 
             arr->put(4, str);
 
-            t_true(arr->get(4)->equal(str));
-            t_true(str->equal(arr->get(4)));
+            t_true(arr->get(4)->equals(str));
+            t_true(str->equals(arr->get(4)));
             t_true(str == arr->get(4));
 
             delete arr;
@@ -77,7 +77,7 @@ class ArrayTest : public Test_template {
             arr->put(4, str);
             arr->put(4, arr);
 
-            t_true(arr->get(4)->equal(arr));
+            t_true(arr->get(4)->equals(arr));
             t_true(arr->equal(arr->get(4)));
             t_true(arr == arr->get(4));
 
@@ -207,8 +207,8 @@ class ArrayTest : public Test_template {
 
             arr->put(4, str);
 
-            t_true(arr->get(4)->equal(str));
-            t_true(str->equal(arr->get(4)));
+            t_true(arr->get(4)->equals(str));
+            t_true(str->equals(arr->get(4)));
             t_true(str == arr->get(4));
 
             delete arr;
@@ -224,8 +224,8 @@ class ArrayTest : public Test_template {
             arr->put(4, str0);
             arr->put(4, str1);
 
-            t_true(arr->get(4)->equal(str1));
-            t_true(str1->equal(arr->get(4)));
+            t_true(arr->get(4)->equals(str1));
+            t_true(str1->equals(arr->get(4)));
             t_true(str1 == arr->get(4));
 
             delete arr;

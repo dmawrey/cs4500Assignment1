@@ -17,7 +17,7 @@ class ObjectTest : public Test_template {
         void testEqual() {
             Object* obj = new Object();
             t_true(obj->hash() == obj->hash());
-            t_true(obj->equal(obj));
+            t_true(obj->equals(obj));
 
             delete obj;
             OK("ObjectTest.testEqual");
@@ -27,8 +27,8 @@ class ObjectTest : public Test_template {
             Object* obj0 = new Object();
             Object* obj1 = new Object();
             t_false(obj0->hash() == obj1->hash());
-            t_false(obj0->equal(obj1));
-            t_false(obj1->equal(obj0));
+            t_false(obj0->equals(obj1));
+            t_false(obj1->equals(obj0));
 
             delete obj0;
             delete obj1;
