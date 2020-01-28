@@ -14,7 +14,6 @@ class ArrayTest : public Test_template {
         virtual void run() {
             // OBJECT LIST
 
-            testConstructorAllocatesCapacityObj();
             testConstructorInitsToNullptrObj();
             getAndPutWorkObj();
             putReplacesObjectObj();
@@ -26,7 +25,6 @@ class ArrayTest : public Test_template {
 
             // STRING LIST
 
-            testConstructorAllocatesCapacityStr();
             testConstructorInitsToNullptrStr();
             getAndPutWorkStr();
             putReplacesObjectStr();
@@ -38,7 +36,6 @@ class ArrayTest : public Test_template {
 
             // Int LIST
 
-            testConstructorAllocatesCapacityInt();
             getAndPutWorkInt();
             putReplacesObjectInt();
             indexOfFindsObjectInt();
@@ -49,7 +46,6 @@ class ArrayTest : public Test_template {
 
             // Float LIST
 
-            testConstructorAllocatesCapacityFloat();
             getAndPutWorkFloat();
             putReplacesObjectFloat();
             indexOfFindsObjectFloat();
@@ -60,7 +56,6 @@ class ArrayTest : public Test_template {
 
             // Bool LIST
 
-            testConstructorAllocatesCapacityBool();
             getAndPutWorkBool();
             putReplacesObjectBool();
             indexOfFindsObjectBool();
@@ -71,14 +66,6 @@ class ArrayTest : public Test_template {
         }
 
         // OBJECT LIST
-
-       void testConstructorAllocatesCapacityObj() {
-            ObjectArray* arr = new ObjectArray();
-            t_true(arr->size() == 5);
-
-            delete arr;
-            OK("ArrayTest.testConstructorAllocatesCapacityObj");
-        }
 
        void testConstructorInitsToNullptrObj() {
             ObjectArray* arr = new ObjectArray();
@@ -217,14 +204,6 @@ class ArrayTest : public Test_template {
         }
 
         // String
-
-        void testConstructorAllocatesCapacityStr() {
-            StringArray* arr = new StringArray();
-            t_true(arr->size() == 5);
-
-            delete arr;
-            OK("ArrayTest.testConstructorAllocatesCapacityStr");
-        }
 
         void testConstructorInitsToNullptrStr() {
             StringArray* arr = new StringArray();
@@ -367,14 +346,6 @@ class ArrayTest : public Test_template {
 
         // Int
 
-        void testConstructorAllocatesCapacityInt() {
-            IntArray* arr = new IntArray();
-            t_true(arr->size() == 5);
-
-            delete arr;
-            OK("ArrayTest.testConstructorAllocatesCapacityInt");
-        }
-
         void getAndPutWorkInt() {
             IntArray* arr = new IntArray();
             int i1 = 5;
@@ -498,14 +469,6 @@ class ArrayTest : public Test_template {
 
         // Float
 
-        void testConstructorAllocatesCapacityFloat() {
-            FloatArray* arr = new FloatArray();
-            t_true(arr->size() == 5);
-
-            delete arr;
-            OK("ArrayTest.testConstructorAllocatesCapacityFloat");
-        }
-
         void getAndPutWorkFloat() {
             FloatArray* arr = new FloatArray();
             float f1 = 5.0;
@@ -628,14 +591,6 @@ class ArrayTest : public Test_template {
         }
 
         // Bool
-
-        void testConstructorAllocatesCapacityBool() {
-            BoolArray* arr = new BoolArray();
-            t_true(arr->size() == 5);
-
-            delete arr;
-            OK("ArrayTest.testConstructorAllocatesCapacityBool");
-        }
 
         void getAndPutWorkBool() {
             BoolArray* arr = new BoolArray();
