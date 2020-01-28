@@ -3,11 +3,6 @@
 #include "tests/array_test.h"
 
 int main() {
-    ObjectTest objectTest;
-    StringTest stringTest;
     ArrayTest arrayTest;
-
-    objectTest.run();
-    stringTest.run();
     arrayTest.run();
 }
