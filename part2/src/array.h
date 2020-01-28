@@ -103,7 +103,7 @@ class StringArray: public Object {
 
         /**
          * Sets the object at the given index. Indices are bound checked.
-         * @param obj The object that should be
+         * @param givenString The object that should be placed in the array
          * @param i
          */
         void put(size_t i, String* givenString) {}
@@ -111,7 +111,7 @@ class StringArray: public Object {
         /**
          * Returns the first occurrence of the given object in the array using the object's equal() method.
          * If the object is not found, size() is returned.
-         * @param obj The object to find in the array
+         * @param givenString The object to find in the array
          * @return The first index of the object. size() if not found
          */
         size_t indexOf(String* givenString) {}
@@ -162,7 +162,7 @@ class IntArray: public Object {
 
         /**
          * Sets the object at the given index. Indices are bound checked.
-         * @param givenInt The int that should be
+         * @param givenInt The int that should be placed in the array
          * @param i
          */
         void put(size_t i, int givenInt) {}
@@ -220,7 +220,7 @@ class FloatArray: public Object {
 
         /**
          * Sets the object at the given index. Indices are bound checked.
-         * @param givenFloat The float that should be
+         * @param givenFloat The float that should be placed in the array
          * @param i
          */
         void put(size_t i, float givenFloat) {}
@@ -278,7 +278,7 @@ class BoolArray: public Object {
 
         /**
          * Sets the object at the given index. Indices are bound checked.
-         * @param givenBool The boolean that should be
+         * @param givenBool The boolean that should be placed in the array
          * @param i
          */
         void put(size_t i, bool givenBool) {}
