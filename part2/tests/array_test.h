@@ -14,7 +14,6 @@ class ArrayTest : public Test_template {
         virtual void run() {
             // OBJECT LIST
 
-            testConstructorAllocatesCapacityObj();
             testConstructorInitsToNullptrObj();
             getAndPutWorkObj();
             putReplacesObjectObj();
@@ -26,7 +25,6 @@ class ArrayTest : public Test_template {
 
             // STRING LIST
 
-            testConstructorAllocatesCapacityStr();
             testConstructorInitsToNullptrStr();
             getAndPutWorkStr();
             putReplacesObjectStr();
@@ -38,7 +36,6 @@ class ArrayTest : public Test_template {
 
             // Int LIST
 
-            testConstructorAllocatesCapacityInt();
             getAndPutWorkInt();
             putReplacesObjectInt();
             indexOfFindsObjectInt();
@@ -49,7 +46,6 @@ class ArrayTest : public Test_template {
 
             // Float LIST
 
-            testConstructorAllocatesCapacityFloat();
             getAndPutWorkFloat();
             putReplacesObjectFloat();
             indexOfFindsObjectFloat();
@@ -60,7 +56,6 @@ class ArrayTest : public Test_template {
 
             // Bool LIST
 
-            testConstructorAllocatesCapacityBool();
             getAndPutWorkBool();
             putReplacesObjectBool();
             indexOfFindsObjectBool();
@@ -72,16 +67,8 @@ class ArrayTest : public Test_template {
 
         // OBJECT LIST
 
-       void testConstructorAllocatesCapacityObj() {
-            ObjectArray* arr = new ObjectArray(5);
-            t_true(arr->size() == 5);
-
-            delete arr;
-            OK("ArrayTest.testConstructorAllocatesCapacityObj");
-        }
-
        void testConstructorInitsToNullptrObj() {
-            ObjectArray* arr = new ObjectArray(5);
+            ObjectArray* arr = new ObjectArray();
             for (int i = 0; i < 5; i++) { t_true(arr->get(i) == nullptr); }
 
             delete arr;
@@ -89,7 +76,7 @@ class ArrayTest : public Test_template {
        }
 
         void getAndPutWorkObj() {
-            ObjectArray* arr = new ObjectArray(5);
+            ObjectArray* arr = new ObjectArray();
             String* str = new String("HI");
 
             arr->put(4, str);
@@ -104,7 +91,7 @@ class ArrayTest : public Test_template {
         }
 
         void putReplacesObjectObj() {
-            ObjectArray* arr = new ObjectArray(5);
+            ObjectArray* arr = new ObjectArray();
             String* str = new String("HI");
 
             arr->put(4, str);
@@ -120,7 +107,7 @@ class ArrayTest : public Test_template {
         }
 
         void indexOfFindsObjectObj() {
-            ObjectArray* arr = new ObjectArray(5);
+            ObjectArray* arr = new ObjectArray();
             String* str = new String("HI");
 
             arr->put(4, str);
@@ -133,7 +120,7 @@ class ArrayTest : public Test_template {
         }
 
         void indexOfReturnsSizeWhenMissingObj() {
-            ObjectArray* arr = new ObjectArray(5);
+            ObjectArray* arr = new ObjectArray();
             String* str = new String("HI");
 
             t_true(arr->indexOf(str) == arr->size());
@@ -144,8 +131,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksInOrderObj() {
-            ObjectArray* arr0 = new ObjectArray(2);
-            ObjectArray* arr1 = new ObjectArray(2);
+            ObjectArray* arr0 = new ObjectArray();
+            ObjectArray* arr1 = new ObjectArray();
 
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
@@ -169,8 +156,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksInOrderDiffSizeObj() {
-            ObjectArray* arr0 = new ObjectArray(3);
-            ObjectArray* arr1 = new ObjectArray(2);
+            ObjectArray* arr0 = new ObjectArray();
+            ObjectArray* arr1 = new ObjectArray();
 
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
@@ -193,8 +180,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksOutOfOrderObj() {
-            ObjectArray* arr0 = new ObjectArray(2);
-            ObjectArray* arr1 = new ObjectArray(2);
+            ObjectArray* arr0 = new ObjectArray();
+            ObjectArray* arr1 = new ObjectArray();
 
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
@@ -218,16 +205,8 @@ class ArrayTest : public Test_template {
 
         // String
 
-        void testConstructorAllocatesCapacityStr() {
-            StringArray* arr = new StringArray(5);
-            t_true(arr->size() == 5);
-
-            delete arr;
-            OK("ArrayTest.testConstructorAllocatesCapacityStr");
-        }
-
         void testConstructorInitsToNullptrStr() {
-            StringArray* arr = new StringArray(5);
+            StringArray* arr = new StringArray();
             for (int i = 0; i < 5; i++) { t_true(arr->get(i) == nullptr); }
 
             delete arr;
@@ -235,7 +214,7 @@ class ArrayTest : public Test_template {
         }
 
         void getAndPutWorkStr() {
-            StringArray* arr = new StringArray(5);
+            StringArray* arr = new StringArray();
             String* str = new String("HI");
 
             arr->put(4, str);
@@ -250,7 +229,7 @@ class ArrayTest : public Test_template {
         }
 
         void putReplacesObjectStr() {
-            StringArray* arr = new StringArray(5);
+            StringArray* arr = new StringArray();
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
 
@@ -268,7 +247,7 @@ class ArrayTest : public Test_template {
         }
 
         void indexOfFindsObjectStr() {
-            StringArray* arr = new StringArray(5);
+            StringArray* arr = new StringArray();
             String* str = new String("HI");
 
             arr->put(4, str);
@@ -281,7 +260,7 @@ class ArrayTest : public Test_template {
         }
 
         void indexOfReturnsSizeWhenMissingStr() {
-            StringArray* arr = new StringArray(5);
+            StringArray* arr = new StringArray();
             String* str = new String("HI");
 
             t_true(arr->indexOf(str) == arr->size());
@@ -292,8 +271,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksInOrderStr() {
-            StringArray* arr0 = new StringArray(2);
-            StringArray* arr1 = new StringArray(2);
+            StringArray* arr0 = new StringArray();
+            StringArray* arr1 = new StringArray();
 
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
@@ -317,8 +296,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksInOrderDiffSizeStr() {
-            StringArray* arr0 = new StringArray(3);
-            StringArray* arr1 = new StringArray(2);
+            StringArray* arr0 = new StringArray();
+            StringArray* arr1 = new StringArray();
 
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
@@ -341,8 +320,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksOutOfOrderStr() {
-            StringArray* arr0 = new StringArray(2);
-            StringArray* arr1 = new StringArray(2);
+            StringArray* arr0 = new StringArray();
+            StringArray* arr1 = new StringArray();
 
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
@@ -367,16 +346,8 @@ class ArrayTest : public Test_template {
 
         // Int
 
-        void testConstructorAllocatesCapacityInt() {
-            IntArray* arr = new IntArray(5);
-            t_true(arr->size() == 5);
-
-            delete arr;
-            OK("ArrayTest.testConstructorAllocatesCapacityInt");
-        }
-
         void getAndPutWorkInt() {
-            IntArray* arr = new IntArray(5);
+            IntArray* arr = new IntArray();
             int i1 = 5;
 
             arr->put(4, i1);
@@ -389,7 +360,7 @@ class ArrayTest : public Test_template {
         }
 
         void putReplacesObjectInt() {
-            IntArray* arr = new IntArray(5);
+            IntArray* arr = new IntArray();
 
             int i1 = 5;
             int i2 = 10;
@@ -405,7 +376,7 @@ class ArrayTest : public Test_template {
         }
 
         void indexOfFindsObjectInt() {
-            IntArray* arr = new IntArray(5);
+            IntArray* arr = new IntArray();
             int i1 = 5;
 
             arr->put(4, i1);
@@ -417,7 +388,7 @@ class ArrayTest : public Test_template {
         }
 
         void indexOfReturnsSizeWhenMissingInt() {
-            IntArray* arr = new IntArray(5);
+            IntArray* arr = new IntArray();
             int i1 = 5;
 
             t_true(arr->indexOf(i1) == arr->size());
@@ -427,8 +398,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksInOrderInt() {
-            IntArray* arr0 = new IntArray(2);
-            IntArray* arr1 = new IntArray(2);
+            IntArray* arr0 = new IntArray();
+            IntArray* arr1 = new IntArray();
 
             int i1 = 5;
             int i2 = 10;
@@ -450,8 +421,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksInOrderDiffSizeInt() {
-            IntArray* arr0 = new IntArray(3);
-            IntArray* arr1 = new IntArray(2);
+            IntArray* arr0 = new IntArray();
+            IntArray* arr1 = new IntArray();
 
             int i1 = 5;
             int i2 = 10;
@@ -472,8 +443,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksOutOfOrderInt() {
-            IntArray* arr0 = new IntArray(2);
-            IntArray* arr1 = new IntArray(2);
+            IntArray* arr0 = new IntArray();
+            IntArray* arr1 = new IntArray();
 
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
@@ -498,16 +469,8 @@ class ArrayTest : public Test_template {
 
         // Float
 
-        void testConstructorAllocatesCapacityFloat() {
-            FloatArray* arr = new FloatArray(5);
-            t_true(arr->size() == 5);
-
-            delete arr;
-            OK("ArrayTest.testConstructorAllocatesCapacityFloat");
-        }
-
         void getAndPutWorkFloat() {
-            FloatArray* arr = new FloatArray(5);
+            FloatArray* arr = new FloatArray();
             float f1 = 5.0;
 
             arr->put(4, f1);
@@ -520,7 +483,7 @@ class ArrayTest : public Test_template {
         }
 
         void putReplacesObjectFloat() {
-            FloatArray* arr = new FloatArray(5);
+            FloatArray* arr = new FloatArray();
 
             float f1 = 5.0;
             float f2 = 10.0;
@@ -536,7 +499,7 @@ class ArrayTest : public Test_template {
         }
 
         void indexOfFindsObjectFloat() {
-            FloatArray* arr = new FloatArray(5);
+            FloatArray* arr = new FloatArray();
             float f1 = 5.0;
 
             arr->put(4, f1);
@@ -548,7 +511,7 @@ class ArrayTest : public Test_template {
         }
 
         void indexOfReturnsSizeWhenMissingFloat() {
-            FloatArray* arr = new FloatArray(5);
+            FloatArray* arr = new FloatArray();
             float f1 = 5.0;
 
             t_true(arr->indexOf(f1) == arr->size());
@@ -558,8 +521,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksInOrderFloat() {
-            FloatArray* arr0 = new FloatArray(2);
-            FloatArray* arr1 = new FloatArray(2);
+            FloatArray* arr0 = new FloatArray();
+            FloatArray* arr1 = new FloatArray();
 
             float f1 = 5.0;
             float f2 = 10.0;
@@ -581,8 +544,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksInOrderDiffSizeFloat() {
-            FloatArray* arr0 = new FloatArray(3);
-            FloatArray* arr1 = new FloatArray(2);
+            FloatArray* arr0 = new FloatArray();
+            FloatArray* arr1 = new FloatArray();
 
             float f1 = 5.0;
             float f2 = 10.0;
@@ -603,8 +566,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksOutOfOrderFloat() {
-            FloatArray* arr0 = new FloatArray(2);
-            FloatArray* arr1 = new FloatArray(2);
+            FloatArray* arr0 = new FloatArray();
+            FloatArray* arr1 = new FloatArray();
 
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
@@ -629,16 +592,8 @@ class ArrayTest : public Test_template {
 
         // Bool
 
-        void testConstructorAllocatesCapacityBool() {
-            BoolArray* arr = new BoolArray(5);
-            t_true(arr->size() == 5);
-
-            delete arr;
-            OK("ArrayTest.testConstructorAllocatesCapacityBool");
-        }
-
         void getAndPutWorkBool() {
-            BoolArray* arr = new BoolArray(5);
+            BoolArray* arr = new BoolArray();
             bool b1 = true;
 
             arr->put(4, b1);
@@ -651,7 +606,7 @@ class ArrayTest : public Test_template {
         }
 
         void putReplacesObjectBool() {
-            BoolArray* arr = new BoolArray(5);
+            BoolArray* arr = new BoolArray();
 
             bool b1 = true;
             bool b2 = false;
@@ -667,7 +622,7 @@ class ArrayTest : public Test_template {
         }
 
         void indexOfFindsObjectBool() {
-            BoolArray* arr = new BoolArray(5);
+            BoolArray* arr = new BoolArray();
             bool b1 = true;
 
             arr->put(4, b1);
@@ -679,7 +634,7 @@ class ArrayTest : public Test_template {
         }
 
         void indexOfReturnsSizeWhenMissingBool() {
-            BoolArray* arr = new BoolArray(5);
+            BoolArray* arr = new BoolArray();
             bool b1 = true;
 
             t_true(arr->indexOf(b1) == arr->size());
@@ -689,8 +644,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksInOrderBool() {
-            BoolArray* arr0 = new BoolArray(2);
-            BoolArray* arr1 = new BoolArray(2);
+            BoolArray* arr0 = new BoolArray();
+            BoolArray* arr1 = new BoolArray();
 
             bool b1 = true;
             bool b2 = false;
@@ -712,8 +667,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksInOrderDiffSizeBool() {
-            BoolArray* arr0 = new BoolArray(3);
-            BoolArray* arr1 = new BoolArray(2);
+            BoolArray* arr0 = new BoolArray();
+            BoolArray* arr1 = new BoolArray();
 
             bool b1 = true;
             bool b2 = false;
@@ -734,8 +689,8 @@ class ArrayTest : public Test_template {
         }
 
         void equalsWorksOutOfOrderBool() {
-            BoolArray* arr0 = new BoolArray(2);
-            BoolArray* arr1 = new BoolArray(2);
+            BoolArray* arr0 = new BoolArray();
+            BoolArray* arr1 = new BoolArray();
 
             String* str0 = new String("HI");
             String* str1 = new String("BYE");

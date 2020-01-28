@@ -12,7 +12,7 @@ class ObjectArray: public Object {
          * Creates a new object array. All of the elements in the array are initialized to nullptr.
          * @param size The capacity of the array. Should be > 0, otherwise the program will exit.
          */
-        ObjectArray(size_t size) : Object() {}
+        ObjectArray() : Object() {}
 
         virtual ~ObjectArray() {}
 
@@ -71,7 +71,7 @@ class StringArray: public Object {
          * Creates a new object array. All of the elements in the array are initialized to nullptr.
          * @param size The capacity of the array. Should be > 0, otherwise the program will exit.
          */
-        StringArray(size_t size) : Object() {}
+        StringArray() : Object() {}
 
         virtual ~StringArray() {}
 
@@ -130,7 +130,7 @@ class IntArray: public Object {
          * Creates a new object array. All of the elements in the array are initialized to nullptr.
          * @param size The capacity of the array. Should be > 0, otherwise the program will exit.
          */
-        IntArray(size_t size) : Object() {}
+        IntArray() : Object() {}
 
         virtual ~IntArray() {}
 
@@ -188,7 +188,7 @@ class FloatArray: public Object {
          * Creates a new object array. All of the elements in the array are initialized to nullptr.
          * @param size The capacity of the array. Should be > 0, otherwise the program will exit.
          */
-        FloatArray(size_t size) : Object() {}
+        FloatArray() : Object() {}
 
         virtual ~FloatArray() {}
 
@@ -246,7 +246,7 @@ class BoolArray: public Object {
          * Creates a new object array. All of the elements in the array are initialized to nullptr.
          * @param size The capacity of the array. Should be > 0, otherwise the program will exit.
          */
-        BoolArray(size_t size) : Object() {}
+        BoolArray() : Object() {}
 
         virtual ~BoolArray() {}
 
