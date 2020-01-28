@@ -78,7 +78,7 @@ class ArrayTest : public Test_template {
             arr->put(4, arr);
 
             t_true(arr->get(4)->equals(arr));
-            t_true(arr->equal(arr->get(4)));
+            t_true(arr->equals(arr->get(4)));
             t_true(arr == arr->get(4));
 
             delete arr;
@@ -123,8 +123,8 @@ class ArrayTest : public Test_template {
             arr1->put(1, str0);
             arr1->put(0, str1);
 
-            t_true(arr0->equal(arr1));
-            t_true(arr1->equal(arr0));
+            t_true(arr0->equals(arr1));
+            t_true(arr1->equals(arr0));
             t_true(arr1->hash() == arr0->hash());
 
             delete arr0;
@@ -148,8 +148,8 @@ class ArrayTest : public Test_template {
             arr1->put(1, str0);
             arr1->put(0, str1);
 
-            t_false(arr0->equal(arr1));
-            t_false(arr1->equal(arr0));
+            t_false(arr0->equals(arr1));
+            t_false(arr1->equals(arr0));
 
             delete arr0;
             delete arr1;
@@ -172,8 +172,8 @@ class ArrayTest : public Test_template {
             arr1->put(0, str0);
             arr1->put(1, str1);
 
-            t_false(arr0->equal(arr1));
-            t_false(arr1->equal(arr0));
+            t_false(arr0->equals(arr1));
+            t_false(arr1->equals(arr0));
 
             delete arr0;
             delete arr1;
@@ -271,8 +271,8 @@ class ArrayTest : public Test_template {
             arr1->put(1, str0);
             arr1->put(0, str1);
 
-            t_true(arr0->equal(arr1));
-            t_true(arr1->equal(arr0));
+            t_true(arr0->equals(arr1));
+            t_true(arr1->equals(arr0));
             t_true(arr1->hash() == arr0->hash());
 
             delete arr0;
@@ -296,8 +296,8 @@ class ArrayTest : public Test_template {
             arr1->put(1, str0);
             arr1->put(0, str1);
 
-            t_false(arr0->equal(arr1));
-            t_false(arr1->equal(arr0));
+            t_false(arr0->equals(arr1));
+            t_false(arr1->equals(arr0));
 
             delete arr0;
             delete arr1;
@@ -320,8 +320,8 @@ class ArrayTest : public Test_template {
             arr1->put(0, str0);
             arr1->put(1, str1);
 
-            t_false(arr0->equal(arr1));
-            t_false(arr1->equal(arr0));
+            t_false(arr0->equals(arr1));
+            t_false(arr1->equals(arr0));
 
             delete arr0;
             delete arr1;

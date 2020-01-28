@@ -28,7 +28,7 @@ class ObjectArray: public Object {
          * @param other The object to compare this object to
          * @return true if the other object is equal to this object; false otherwise
          */
-        virtual bool equal(Object* other) {}
+        virtual bool equals(Object* other) {}
 
         /**
          * @return The size of the array
@@ -87,7 +87,7 @@ class StringArray: public Object {
          * @param other The object to compare this object to
          * @return true if the other object is equal to this object; false otherwise
          */
-        virtual bool equal(Object* other) {}
+        virtual bool equals(Object* other) {}
 
         /**
          * @return The size of the array
