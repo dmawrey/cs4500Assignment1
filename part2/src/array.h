@@ -3,7 +3,7 @@
 #include "object.h"
 
 /**
- * An array of objects with a fixed size
+ * An array of objects with a dynamic size
  */
 class ObjectArray: public Object {
     public:
@@ -60,7 +60,7 @@ class ObjectArray: public Object {
 };
 
 /**
- * An array of strings with a fixed size
+ * An array of strings with a dynamic size
  */
 class StringArray: public Object {
     public:
@@ -106,7 +106,7 @@ class StringArray: public Object {
          * @param obj The object that should be
          * @param i
          */
-        void put(size_t i, String* obj) {}
+        void put(size_t i, String* givenString) {}
 
         /**
          * Returns the first occurrence of the given object in the array using the object's equal() method.
@@ -114,6 +114,181 @@ class StringArray: public Object {
          * @param obj The object to find in the array
          * @return The first index of the object. size() if not found
          */
-        size_t indexOf(String* obj) {}
+        size_t indexOf(String* givenString) {}
 
 };
+
+/**
+ * An array of ints with a dynamic size
+ */
+class IntArray: public Object {
+    public:
+
+        // NOTE: IntArray can be implementing using ObjectArray for code reuse
+
+        /**
+         * Creates a new object array. All of the elements in the array are initialized to nullptr.
+         * @param size The capacity of the array. Should be > 0, otherwise the program will exit.
+         */
+        IntArray(size_t size) : Object() {}
+
+        virtual ~IntArray() {}
+
+        /**
+         * Provides a hash of this array. If this array is equal to another array, the hash codes should be equal
+         * @return The hash code of the array
+         */
+        virtual size_t hash() {}
+
+        /**
+         * Returns true if this array is equal to another object. If the object is an array they are equal if it has
+         * the same elements in the same order as this array.
+         * @param other The object to compare this object to
+         * @return true if the other object is equal to this object; false otherwise
+         */
+        virtual bool equals(Object* other) {}
+
+        /**
+         * @return The size of the array
+         */
+        size_t size() {}
+
+        /**
+         * Returns the element at the given index. Indices are bound checked.
+         * @param i The index of the element to return
+         * @return The element at i
+         */
+        int get(size_t i) {};
+
+        /**
+         * Sets the object at the given index. Indices are bound checked.
+         * @param givenInt The int that should be
+         * @param i
+         */
+        void put(size_t i, int givenInt) {}
+
+        /**
+         * Returns the first occurrence of the given object in the array using the object's equal() method.
+         * If the object is not found, size() is returned.
+         * @param givenInt The int to find in the array
+         * @return The first index of the object. size() if not found
+         */
+        size_t indexOf(int givenInt) {}
+};
+
+/**
+ * An array of floats with a dynamic size
+ */
+class FloatArray: public Object {
+    public:
+
+        // NOTE: FloatArray can be implementing using ObjectArray for code reuse
+
+        /**
+         * Creates a new object array. All of the elements in the array are initialized to nullptr.
+         * @param size The capacity of the array. Should be > 0, otherwise the program will exit.
+         */
+        FloatArray(size_t size) : Object() {}
+
+        virtual ~FloatArray() {}
+
+        /**
+         * Provides a hash of this array. If this array is equal to another array, the hash codes should be equal
+         * @return The hash code of the array
+         */
+        virtual size_t hash() {}
+
+        /**
+         * Returns true if this array is equal to another object. If the object is an array they are equal if it has
+         * the same elements in the same order as this array.
+         * @param other The object to compare this object to
+         * @return true if the other object is equal to this object; false otherwise
+         */
+        virtual bool equals(Object* other) {}
+
+        /**
+         * @return The size of the array
+         */
+        size_t size() {}
+
+        /**
+         * Returns the element at the given index. Indices are bound checked.
+         * @param i The index of the element to return
+         * @return The element at i
+         */
+        float get(size_t i) {};
+
+        /**
+         * Sets the object at the given index. Indices are bound checked.
+         * @param givenFloat The float that should be
+         * @param i
+         */
+        void put(size_t i, float givenFloat) {}
+
+        /**
+         * Returns the first occurrence of the given object in the array using the object's equal() method.
+         * If the object is not found, size() is returned.
+         * @param givenFloat The float to find in the array
+         * @return The first index of the object. size() if not found
+         */
+        size_t indexOf(float givenFloat) {}
+};
+
+/**
+ * An array of bool with a dynamic size
+ */
+class BoolArray: public Object {
+    public:
+
+        // NOTE: BoolArray can be implementing using ObjectArray for code reuse
+
+        /**
+         * Creates a new object array. All of the elements in the array are initialized to nullptr.
+         * @param size The capacity of the array. Should be > 0, otherwise the program will exit.
+         */
+        BoolArray(size_t size) : Object() {}
+
+        virtual ~BoolArray() {}
+
+        /**
+         * Provides a hash of this array. If this array is equal to another array, the hash codes should be equal
+         * @return The hash code of the array
+         */
+        virtual size_t hash() {}
+
+        /**
+         * Returns true if this array is equal to another object. If the object is an array they are equal if it has
+         * the same elements in the same order as this array.
+         * @param other The object to compare this object to
+         * @return true if the other object is equal to this object; false otherwise
+         */
+        virtual bool equals(Object* other) {}
+
+        /**
+         * @return The size of the array
+         */
+        size_t size() {}
+
+        /**
+         * Returns the element at the given index. Indices are bound checked.
+         * @param i The index of the element to return
+         * @return The element at i
+         */
+        bool get(size_t i) {};
+
+        /**
+         * Sets the object at the given index. Indices are bound checked.
+         * @param givenBool The boolean that should be
+         * @param i
+         */
+        void put(size_t i, bool givenBool) {}
+
+        /**
+         * Returns the first occurrence of the given object in the array using the object's equal() method.
+         * If the object is not found, size() is returned.
+         * @param givenBool The boolean to find in the array
+         * @return The first index of the object. size() if not found
+         */
+        size_t indexOf(bool givenBool) {}
+};
+
