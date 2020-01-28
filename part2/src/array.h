@@ -17,6 +17,11 @@ class ObjectArray: public Object {
         virtual ~ObjectArray() {}
 
         /**
+         * Push back the given object onto the array
+         */
+        virtual void push_back(Object* obj) {}
+
+        /**
          * Provides a hash of this array. If this array is equal to another array, the hash codes should be equal
          * @return The hash code of the array
          */
@@ -74,6 +79,11 @@ class StringArray: public Object {
         StringArray() : Object() {}
 
         virtual ~StringArray() {}
+
+        /**
+         * Push back the given string onto the array
+         */
+        virtual void push_back(String* obj) {}
 
         /**
          * Provides a hash of this array. If this array is equal to another array, the hash codes should be equal
@@ -135,6 +145,11 @@ class IntArray: public Object {
         virtual ~IntArray() {}
 
         /**
+         * Push back the given int onto the array
+         */
+        virtual void push_back(int obj) {}
+
+        /**
          * Provides a hash of this array. If this array is equal to another array, the hash codes should be equal
          * @return The hash code of the array
          */
@@ -193,6 +208,11 @@ class FloatArray: public Object {
         virtual ~FloatArray() {}
 
         /**
+         * Push back the given float onto the array
+         */
+        virtual void push_back(float obj) {}
+
+        /**
          * Provides a hash of this array. If this array is equal to another array, the hash codes should be equal
          * @return The hash code of the array
          */
@@ -249,6 +269,11 @@ class BoolArray: public Object {
         BoolArray() : Object() {}
 
         virtual ~BoolArray() {}
+
+        /**
+         * Push back the given bool onto the array
+         */
+        virtual void push_back(bool obj) {}
 
         /**
          * Provides a hash of this array. If this array is equal to another array, the hash codes should be equal

@@ -16,6 +16,7 @@ class ArrayTest : public Test_template {
 
             testConstructorInitsToNullptrObj();
             getAndPutWorkObj();
+            pushBackObj();
             putReplacesObjectObj();
             indexOfFindsObjectObj();
             indexOfReturnsSizeWhenMissingObj();
@@ -27,6 +28,7 @@ class ArrayTest : public Test_template {
 
             testConstructorInitsToNullptrStr();
             getAndPutWorkStr();
+            pushBackStr();
             putReplacesObjectStr();
             indexOfFindsObjectStr();
             indexOfReturnsSizeWhenMissingStr();
@@ -37,6 +39,7 @@ class ArrayTest : public Test_template {
             // Int LIST
 
             getAndPutWorkInt();
+            pushBackInt();
             putReplacesObjectInt();
             indexOfFindsObjectInt();
             indexOfReturnsSizeWhenMissingInt();
@@ -47,6 +50,7 @@ class ArrayTest : public Test_template {
             // Float LIST
 
             getAndPutWorkFloat();
+            pushBackFloat();
             putReplacesObjectFloat();
             indexOfFindsObjectFloat();
             indexOfReturnsSizeWhenMissingFloat();
@@ -57,6 +61,7 @@ class ArrayTest : public Test_template {
             // Bool LIST
 
             getAndPutWorkBool();
+            pushBackBool();
             putReplacesObjectBool();
             indexOfFindsObjectBool();
             indexOfReturnsSizeWhenMissingBool();
@@ -88,6 +93,22 @@ class ArrayTest : public Test_template {
             delete arr;
             delete str;
             OK("ArrayTest.getAndPutWorkObj");
+        }
+
+        void pushBackObj() {
+            ObjectArray* arr = new ObjectArray();
+            String* str = new String("HI");
+
+            arr->push_back(str);
+
+            t_true(arr->get(0)->equals(str));
+            t_true(str->equals(arr->get(0)));
+            t_true(str == arr->get(0));
+            t_true(arr->size == 1);
+
+            delete arr;
+            delete str;
+            OK("ArrayTest.pushBackObj");
         }
 
         void putReplacesObjectObj() {
@@ -228,6 +249,22 @@ class ArrayTest : public Test_template {
             OK("ArrayTest.getAndPutWorkStr");
         }
 
+        void pushBackStr() {
+            StringArray* arr = new StringArray();
+            String* str = new String("HI");
+
+            arr->push_back(str);
+
+            t_true(arr->get(0)->equals(str));
+            t_true(str->equals(arr->get(0)));
+            t_true(str == arr->get(0));
+            t_true(arr->size == 1);
+
+            delete arr;
+            delete str;
+            OK("ArrayTest.pushBackStr");
+        }
+
         void putReplacesObjectStr() {
             StringArray* arr = new StringArray();
             String* str0 = new String("HI");
@@ -359,6 +396,20 @@ class ArrayTest : public Test_template {
             OK("ArrayTest.getAndPutWorkInt");
         }
 
+        void pushBackInt() {
+            IntArray* arr = new IntArray();
+            int i1 = 5;
+
+            arr->push_back(i1);
+
+            t_true(i1 == arr->get(0));
+            t_true(arr->get(0) == i1);
+            t_true(arr->size == 1);
+
+            delete arr;
+            OK("ArrayTest.pushBackInt");
+        }
+
         void putReplacesObjectInt() {
             IntArray* arr = new IntArray();
 
@@ -482,6 +533,20 @@ class ArrayTest : public Test_template {
             OK("ArrayTest.getAndPutWorkFloat");
         }
 
+        void pushBackFloat() {
+            FloatArray* arr = new FloatArray();
+            float f1 = 5.0;
+
+            arr->push_back(f1);
+
+            t_true(f1 == arr->get(4));
+            t_true(arr->get(4) == f1);
+            t_true(arr->size == 1);
+
+            delete arr;
+            OK("ArrayTest.pushBackFloat");
+        }
+
         void putReplacesObjectFloat() {
             FloatArray* arr = new FloatArray();
 
@@ -603,6 +668,20 @@ class ArrayTest : public Test_template {
 
             delete arr;
             OK("ArrayTest.getAndPutWorkBool");
+        }
+
+        void pushBackBool() {
+            BoolArray* arr = new BoolArray();
+            bool b1 = true;
+
+            arr->push_back(b1);
+
+            t_true(b1 == arr->get(4));
+            t_true(arr->get(4) == b1);
+            t_true(arr->size == 1);
+
+            delete arr;
+            OK("ArrayTest.pushBackBool");
         }
 
         void putReplacesObjectBool() {
