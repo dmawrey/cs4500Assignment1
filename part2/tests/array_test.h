@@ -61,7 +61,6 @@ class ArrayTest : public Test_template {
             // Bool LIST
 
             testConstructorAllocatesCapacityBool();
-            testConstructorInitsToNullptrBool();
             getAndPutWorkBool();
             putReplacesObjectBool();
             indexOfFindsObjectBool();
@@ -636,14 +635,6 @@ class ArrayTest : public Test_template {
 
             delete arr;
             OK("ArrayTest.testConstructorAllocatesCapacityBool");
-        }
-
-        void testConstructorInitsToNullptrBool() {
-            BoolArray* arr = new BoolArray(5);
-            for (int i = 0; i < 5; i++) { t_true(arr->get(i) == nullptr); }
-
-            delete arr;
-            OK("ArrayTest.testConstructorInitsToNullptrBool");
         }
 
         void getAndPutWorkBool() {
