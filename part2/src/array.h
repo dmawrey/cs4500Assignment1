@@ -1,6 +1,10 @@
 #pragma once
 
+#include <stdlib.h>
 #include "object.h"
+#include "string.h"
+#include "object.h"
+
 
 /**
  * An array of objects with a dynamic size
