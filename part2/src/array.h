@@ -141,8 +141,7 @@ class IntArray: public Object {
         // NOTE: IntArray can be implementing using ObjectArray for code reuse
 
         /**
-         * Creates a new object array. All of the elements in the array are initialized to nullptr.
-         * @param size The capacity of the array. Should be > 0, otherwise the program will exit.
+         * Creates a new int array.
          */
         IntArray() : Object() {}
 
@@ -204,8 +203,7 @@ class FloatArray: public Object {
         // NOTE: FloatArray can be implementing using ObjectArray for code reuse
 
         /**
-         * Creates a new object array. All of the elements in the array are initialized to nullptr.
-         * @param size The capacity of the array. Should be > 0, otherwise the program will exit.
+         * Creates a new float array.
          */
         FloatArray() : Object() {}
 
@@ -267,8 +265,7 @@ class BoolArray: public Object {
         // NOTE: BoolArray can be implementing using ObjectArray for code reuse
 
         /**
-         * Creates a new object array. All of the elements in the array are initialized to nullptr.
-         * @param size The capacity of the array. Should be > 0, otherwise the program will exit.
+         * Creates a new bool array.
          */
         BoolArray() : Object() {}
 
