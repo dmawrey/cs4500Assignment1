@@ -79,7 +79,7 @@ class ArrayTest : public Test_template {
             ObjectArray* arr = new ObjectArray();
             String* str = new String("HI");
 
-            arr->set(0, str);
+            arr->push_back(str);
 
             t_true(arr->get(0)->equals(str));
             t_true(str->equals(arr->get(0)));
@@ -110,7 +110,7 @@ class ArrayTest : public Test_template {
             ObjectArray* arr = new ObjectArray();
             String* str = new String("HI");
 
-            arr->set(0, str);
+            arr->push_back(str);
             arr->set(0, arr);
 
             t_true(arr->get(0)->equals(arr));
@@ -126,7 +126,7 @@ class ArrayTest : public Test_template {
             ObjectArray* arr = new ObjectArray();
             String* str = new String("HI");
 
-            arr->set(0, str);
+            arr->push_back(str);
 
             t_true(arr->indexOf(str) == 0);
 
@@ -209,7 +209,7 @@ class ArrayTest : public Test_template {
             StringArray* arr = new StringArray();
             String* str = new String("HI");
 
-            arr->set(0, str);
+            arr->push_back(str);
 
             t_true(arr->get(0)->equals(str));
             t_true(str->equals(arr->get(0)));
@@ -241,7 +241,7 @@ class ArrayTest : public Test_template {
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
 
-            arr->set(0, str0);
+            arr->push_back(str0);
             arr->set(0, str1);
 
             t_true(arr->get(0)->equals(str1));
@@ -258,7 +258,7 @@ class ArrayTest : public Test_template {
             StringArray* arr = new StringArray();
             String* str = new String("HI");
 
-            arr->set(0, str);
+            arr->push_back(str);
 
             t_true(arr->indexOf(str) == 0);
 
@@ -334,7 +334,7 @@ class ArrayTest : public Test_template {
             IntArray* arr = new IntArray();
             int i1 = 5;
 
-            arr->set(0, i1);
+            arr->push_back(i1);
 
             t_true(i1 == arr->get(0));
             t_true(arr->get(0) == i1);
@@ -363,7 +363,7 @@ class ArrayTest : public Test_template {
             int i1 = 5;
             int i2 = 10;
 
-            arr->set(0, i1);
+            arr->push_back(i1);
             arr->set(0, i2);
 
             t_true(arr->get(0) == i2);
@@ -377,7 +377,7 @@ class ArrayTest : public Test_template {
             IntArray* arr = new IntArray();
             int i1 = 5;
 
-            arr->set(0, i1);
+            arr->push_back(i1);
 
             t_true(arr->indexOf(i1) == 4);
 
@@ -449,7 +449,7 @@ class ArrayTest : public Test_template {
             FloatArray* arr = new FloatArray();
             float f1 = 5.0;
 
-            arr->set(0, f1);
+            arr->push_back(f1);
 
             t_true(f1 == arr->get(0));
             t_true(arr->get(0) == f1);
@@ -478,7 +478,7 @@ class ArrayTest : public Test_template {
             float f1 = 5.0;
             float f2 = 10.0;
 
-            arr->set(0, f1);
+            arr->push_back(f1);
             arr->set(0, f2);
 
             t_true(arr->get(0) == f2);
@@ -492,7 +492,7 @@ class ArrayTest : public Test_template {
             FloatArray* arr = new FloatArray();
             float f1 = 5.0;
 
-            arr->set(0, f1);
+            arr->push_back(f1);
 
             t_true(arr->indexOf(f1) == 4);
 
@@ -564,7 +564,7 @@ class ArrayTest : public Test_template {
             BoolArray* arr = new BoolArray();
             bool b1 = true;
 
-            arr->set(0, b1);
+            arr->push_back(b1);
 
             t_true(b1 == arr->get(0));
             t_true(arr->get(0) == b1);
@@ -593,7 +593,7 @@ class ArrayTest : public Test_template {
             bool b1 = true;
             bool b2 = false;
 
-            arr->set(0, b1);
+            arr->push_back(b1);
             arr->set(0, b2);
 
             t_true(arr->get(0) == b2);
@@ -607,7 +607,7 @@ class ArrayTest : public Test_template {
             BoolArray* arr = new BoolArray();
             bool b1 = true;
 
-            arr->set(0, b1);
+            arr->push_back(b1);
 
             t_true(arr->indexOf(b1) == 4);
 
