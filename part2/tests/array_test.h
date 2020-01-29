@@ -189,8 +189,8 @@ class ArrayTest : public Test_template {
             arr1->put(1, str0);
             arr1->put(0, str1);
 
-            t_false(arr0->equals(arr1));
-            t_false(arr1->equals(arr0));
+            t_true(arr0->equals(arr1));
+            t_true(arr1->equals(arr0));
 
             delete arr0;
             delete arr1;
@@ -676,7 +676,7 @@ class ArrayTest : public Test_template {
 
             arr->push_back(b1);
 
-            t_true(b1 == arr->get(4));
+            t_true(b1 == arr->get(0));
             t_true(arr->get(4) == b1);
             t_true(arr->size == 1);
 
