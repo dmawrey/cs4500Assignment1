@@ -52,11 +52,11 @@ class ObjectArray: public Object {
         Object* get(size_t i) {};
 
         /**
-         * Sets the object at the given index. Indices are bound checked.
+         * Sets the object at the given index. Indices are bound checked. Cannot set out of size bounds
          * @param obj The object that should be
          * @param i
          */
-        void put(size_t i, Object* obj) {}
+        void set(size_t i, Object* obj) {}
 
         /**
          * Returns the first occurrence of the given object in the array using the object's equal() method.
@@ -116,11 +116,11 @@ class StringArray: public Object {
         Object* get(size_t i) {};
 
         /**
-         * Sets the object at the given index. Indices are bound checked.
+         * Sets the object at the given index. Indices are bound checked. Cannot set out of size bounds
          * @param givenString The object that should be placed in the array
          * @param i
          */
-        void put(size_t i, String* givenString) {}
+        void set(size_t i, String* givenString) {}
 
         /**
          * Returns the first occurrence of the given object in the array using the object's equal() method.
@@ -179,11 +179,11 @@ class IntArray: public Object {
         int get(size_t i) {};
 
         /**
-         * Sets the object at the given index. Indices are bound checked.
+         * Sets the object at the given index. Indices are bound checked. Cannot set out of size bounds
          * @param givenInt The int that should be placed in the array
          * @param i
          */
-        void put(size_t i, int givenInt) {}
+        void set(size_t i, int givenInt) {}
 
         /**
          * Returns the first occurrence of the given object in the array using the object's equal() method.
@@ -241,11 +241,11 @@ class FloatArray: public Object {
         float get(size_t i) {};
 
         /**
-         * Sets the object at the given index. Indices are bound checked.
+         * Sets the object at the given index. Indices are bound checked. Cannot set out of size bounds
          * @param givenFloat The float that should be placed in the array
          * @param i
          */
-        void put(size_t i, float givenFloat) {}
+        void set(size_t i, float givenFloat) {}
 
         /**
          * Returns the first occurrence of the given object in the array using the object's equal() method.
@@ -303,11 +303,11 @@ class BoolArray: public Object {
         bool get(size_t i) {};
 
         /**
-         * Sets the object at the given index. Indices are bound checked.
+         * Sets the object at the given index. Indices are bound checked. Cannot set out of size bounds
          * @param givenBool The boolean that should be placed in the array
          * @param i
          */
-        void put(size_t i, bool givenBool) {}
+        void set(size_t i, bool givenBool) {}
 
         /**
          * Returns the first occurrence of the given object in the array using the object's equal() method.

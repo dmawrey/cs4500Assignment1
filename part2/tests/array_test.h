@@ -15,58 +15,53 @@ class ArrayTest : public Test_template {
             // OBJECT LIST
 
             testConstructorInitsToNullptrObj();
-            getAndPutWorkObj();
+            getAndsetWorkObj();
             pushBackObj();
-            putReplacesObjectObj();
+            setReplacesObjectObj();
             indexOfFindsObjectObj();
             indexOfReturnsSizeWhenMissingObj();
             equalsWorksInOrderObj();
-            equalsWorksInOrderDiffSizeObj();
             equalsWorksOutOfOrderObj();
 
             // STRING LIST
 
             testConstructorInitsToNullptrStr();
-            getAndPutWorkStr();
+            getAndsetWorkStr();
             pushBackStr();
-            putReplacesObjectStr();
+            setReplacesObjectStr();
             indexOfFindsObjectStr();
             indexOfReturnsSizeWhenMissingStr();
             equalsWorksInOrderStr();
-            equalsWorksInOrderDiffSizeStr();
             equalsWorksOutOfOrderStr();
 
             // Int LIST
 
-            getAndPutWorkInt();
+            getAndsetWorkInt();
             pushBackInt();
-            putReplacesObjectInt();
+            setReplacesObjectInt();
             indexOfFindsObjectInt();
             indexOfReturnsSizeWhenMissingInt();
             equalsWorksInOrderInt();
-            equalsWorksInOrderDiffSizeInt();
             equalsWorksOutOfOrderInt();
 
             // Float LIST
 
-            getAndPutWorkFloat();
+            getAndsetWorkFloat();
             pushBackFloat();
-            putReplacesObjectFloat();
+            setReplacesObjectFloat();
             indexOfFindsObjectFloat();
             indexOfReturnsSizeWhenMissingFloat();
             equalsWorksInOrderFloat();
-            equalsWorksInOrderDiffSizeFloat();
             equalsWorksOutOfOrderFloat();
 
             // Bool LIST
 
-            getAndPutWorkBool();
+            getAndsetWorkBool();
             pushBackBool();
-            putReplacesObjectBool();
+            setReplacesObjectBool();
             indexOfFindsObjectBool();
             indexOfReturnsSizeWhenMissingBool();
             equalsWorksInOrderBool();
-            equalsWorksInOrderDiffSizeBool();
             equalsWorksOutOfOrderBool();
         }
 
@@ -80,19 +75,19 @@ class ArrayTest : public Test_template {
             OK("ArrayTest.testConstructorInitsToNullptrObj");
        }
 
-        void getAndPutWorkObj() {
+        void getAndsetWorkObj() {
             ObjectArray* arr = new ObjectArray();
             String* str = new String("HI");
 
-            arr->put(4, str);
+            arr->push_back(str);
 
-            t_true(arr->get(4)->equals(str));
-            t_true(str->equals(arr->get(4)));
-            t_true(str == arr->get(4));
+            t_true(arr->get(0)->equals(str));
+            t_true(str->equals(arr->get(0)));
+            t_true(str == arr->get(0));
 
             delete arr;
             delete str;
-            OK("ArrayTest.getAndPutWorkObj");
+            OK("ArrayTest.getAndsetWorkObj");
         }
 
         void pushBackObj() {
@@ -111,29 +106,29 @@ class ArrayTest : public Test_template {
             OK("ArrayTest.pushBackObj");
         }
 
-        void putReplacesObjectObj() {
+        void setReplacesObjectObj() {
             ObjectArray* arr = new ObjectArray();
             String* str = new String("HI");
 
-            arr->put(4, str);
-            arr->put(4, arr);
+            arr->push_back(str);
+            arr->set(0, arr);
 
-            t_true(arr->get(4)->equals(arr));
-            t_true(arr->equals(arr->get(4)));
-            t_true(arr == arr->get(4));
+            t_true(arr->get(0)->equals(arr));
+            t_true(arr->equals(arr->get(0)));
+            t_true(arr == arr->get(0));
 
             delete arr;
             delete str;
-            OK("ArrayTest.putReplacesObjectObj");
+            OK("ArrayTest.setReplacesObjectObj");
         }
 
         void indexOfFindsObjectObj() {
             ObjectArray* arr = new ObjectArray();
             String* str = new String("HI");
 
-            arr->put(4, str);
+            arr->push_back(str);
 
-            t_true(arr->indexOf(str) == 4);
+            t_true(arr->indexOf(str) == 0);
 
             delete arr;
             delete str;
@@ -158,12 +153,12 @@ class ArrayTest : public Test_template {
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
 
-            arr0->put(1, str0);
-            arr0->put(0, str1);
-
-            arr1->put(1, str0);
-            arr1->put(0, str1);
-
+            arr0->push_back(str0);
+            arr0->push_back(str1);
+            
+            arr1->push_back(str0);
+            arr1->push_back(str1);
+            
             t_true(arr0->equals(arr1));
             t_true(arr1->equals(arr0));
             t_true(arr1->hash() == arr0->hash());
@@ -176,30 +171,6 @@ class ArrayTest : public Test_template {
             OK("ArrayTest.equalsWorksInOrderObj");
         }
 
-        void equalsWorksInOrderDiffSizeObj() {
-            ObjectArray* arr0 = new ObjectArray();
-            ObjectArray* arr1 = new ObjectArray();
-
-            String* str0 = new String("HI");
-            String* str1 = new String("BYE");
-
-            arr0->put(1, str0);
-            arr0->put(0, str1);
-
-            arr1->put(1, str0);
-            arr1->put(0, str1);
-
-            t_true(arr0->equals(arr1));
-            t_true(arr1->equals(arr0));
-
-            delete arr0;
-            delete arr1;
-            delete str0;
-            delete str1;
-
-            OK("ArrayTest.equalsWorksInOrderDiffSizeObj");
-        }
-
         void equalsWorksOutOfOrderObj() {
             ObjectArray* arr0 = new ObjectArray();
             ObjectArray* arr1 = new ObjectArray();
@@ -207,11 +178,11 @@ class ArrayTest : public Test_template {
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
 
-            arr0->put(1, str0);
-            arr0->put(0, str1);
+            arr0->push_back(str0);
+            arr0->push_back(str1);
 
-            arr1->put(0, str0);
-            arr1->put(1, str1);
+            arr1->push_back(str1);
+            arr1->push_back(str0);
 
             t_false(arr0->equals(arr1));
             t_false(arr1->equals(arr0));
@@ -234,19 +205,19 @@ class ArrayTest : public Test_template {
             OK("ArrayTest.testConstructorInitsToNullptrStr");
         }
 
-        void getAndPutWorkStr() {
+        void getAndsetWorkStr() {
             StringArray* arr = new StringArray();
             String* str = new String("HI");
 
-            arr->put(4, str);
+            arr->push_back(str);
 
-            t_true(arr->get(4)->equals(str));
-            t_true(str->equals(arr->get(4)));
-            t_true(str == arr->get(4));
+            t_true(arr->get(0)->equals(str));
+            t_true(str->equals(arr->get(0)));
+            t_true(str == arr->get(0));
 
             delete arr;
             delete str;
-            OK("ArrayTest.getAndPutWorkStr");
+            OK("ArrayTest.getAndsetWorkStr");
         }
 
         void pushBackStr() {
@@ -265,31 +236,31 @@ class ArrayTest : public Test_template {
             OK("ArrayTest.pushBackStr");
         }
 
-        void putReplacesObjectStr() {
+        void setReplacesObjectStr() {
             StringArray* arr = new StringArray();
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
 
-            arr->put(4, str0);
-            arr->put(4, str1);
+            arr->push_back(str0);
+            arr->set(0, str1);
 
-            t_true(arr->get(4)->equals(str1));
-            t_true(str1->equals(arr->get(4)));
-            t_true(str1 == arr->get(4));
+            t_true(arr->get(0)->equals(str1));
+            t_true(str1->equals(arr->get(0)));
+            t_true(str1 == arr->get(0));
 
             delete arr;
             delete str0;
             delete str1;
-            OK("ArrayTest.putReplacesObjectStr");
+            OK("ArrayTest.setReplacesObjectStr");
         }
 
         void indexOfFindsObjectStr() {
             StringArray* arr = new StringArray();
             String* str = new String("HI");
 
-            arr->put(4, str);
+            arr->push_back(str);
 
-            t_true(arr->indexOf(str) == 4);
+            t_true(arr->indexOf(str) == 0);
 
             delete arr;
             delete str;
@@ -314,11 +285,11 @@ class ArrayTest : public Test_template {
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
 
-            arr0->put(1, str0);
-            arr0->put(0, str1);
+            arr0->push_back(str0);
+            arr0->push_back(str1);
 
-            arr1->put(1, str0);
-            arr1->put(0, str1);
+            arr1->push_back(str0);
+            arr1->push_back(str1);
 
             t_true(arr0->equals(arr1));
             t_true(arr1->equals(arr0));
@@ -332,30 +303,6 @@ class ArrayTest : public Test_template {
             OK("ArrayTest.equalsWorksInOrderStr");
         }
 
-        void equalsWorksInOrderDiffSizeStr() {
-            StringArray* arr0 = new StringArray();
-            StringArray* arr1 = new StringArray();
-
-            String* str0 = new String("HI");
-            String* str1 = new String("BYE");
-
-            arr0->put(1, str0);
-            arr0->put(0, str1);
-
-            arr1->put(1, str0);
-            arr1->put(0, str1);
-
-            t_true(arr0->equals(arr1));
-            t_true(arr1->equals(arr0));
-
-            delete arr0;
-            delete arr1;
-            delete str0;
-            delete str1;
-
-            OK("ArrayTest.equalsWorksInOrderDiffSizeStr");
-        }
-
         void equalsWorksOutOfOrderStr() {
             StringArray* arr0 = new StringArray();
             StringArray* arr1 = new StringArray();
@@ -363,11 +310,11 @@ class ArrayTest : public Test_template {
             String* str0 = new String("HI");
             String* str1 = new String("BYE");
 
-            arr0->put(1, str0);
-            arr0->put(0, str1);
+            arr0->push_back(str0);
+            arr0->push_back(str1);
 
-            arr1->put(0, str0);
-            arr1->put(1, str1);
+            arr1->push_back(str1);
+            arr1->push_back(str0);
 
             t_false(arr0->equals(arr1));
             t_false(arr1->equals(arr0));
@@ -383,17 +330,17 @@ class ArrayTest : public Test_template {
 
         // Int
 
-        void getAndPutWorkInt() {
+        void getAndsetWorkInt() {
             IntArray* arr = new IntArray();
             int i1 = 5;
 
-            arr->put(4, i1);
+            arr->push_back(i1);
 
-            t_true(i1 == arr->get(4));
-            t_true(arr->get(4) == i1);
+            t_true(i1 == arr->get(0));
+            t_true(arr->get(0) == i1);
 
             delete arr;
-            OK("ArrayTest.getAndPutWorkInt");
+            OK("ArrayTest.getAndsetWorkInt");
         }
 
         void pushBackInt() {
@@ -410,27 +357,27 @@ class ArrayTest : public Test_template {
             OK("ArrayTest.pushBackInt");
         }
 
-        void putReplacesObjectInt() {
+        void setReplacesObjectInt() {
             IntArray* arr = new IntArray();
 
             int i1 = 5;
             int i2 = 10;
 
-            arr->put(4, i1);
-            arr->put(4, i2);
+            arr->push_back(i1);
+            arr->set(0, i2);
 
-            t_true(arr->get(4) == i2);
-            t_true(i2 == arr->get(4));
+            t_true(arr->get(0) == i2);
+            t_true(i2 == arr->get(0));
 
             delete arr;
-            OK("ArrayTest.putReplacesObjectInt");
+            OK("ArrayTest.setReplacesObjectInt");
         }
 
         void indexOfFindsObjectInt() {
             IntArray* arr = new IntArray();
             int i1 = 5;
 
-            arr->put(4, i1);
+            arr->push_back(i1);
 
             t_true(arr->indexOf(i1) == 4);
 
@@ -455,11 +402,11 @@ class ArrayTest : public Test_template {
             int i1 = 5;
             int i2 = 10;
 
-            arr0->put(1, i1);
-            arr0->put(0, i2);
+            arr0->push_back(i1);
+            arr0->push_back(i2);
 
-            arr1->put(1, i1);
-            arr1->put(0, i2);
+            arr1->push_back(i1);
+            arr1->push_back(i2);
 
             t_true(arr0->equals(arr1));
             t_true(arr1->equals(arr0));
@@ -469,28 +416,6 @@ class ArrayTest : public Test_template {
             delete arr1;
 
             OK("ArrayTest.equalsWorksInOrderInt");
-        }
-
-        void equalsWorksInOrderDiffSizeInt() {
-            IntArray* arr0 = new IntArray();
-            IntArray* arr1 = new IntArray();
-
-            int i1 = 5;
-            int i2 = 10;
-
-            arr0->put(1, i1);
-            arr0->put(0, i2);
-
-            arr1->put(1, i1);
-            arr1->put(0, i2);
-
-            t_true(arr0->equals(arr1));
-            t_true(arr1->equals(arr0));
-
-            delete arr0;
-            delete arr1;
-
-            OK("ArrayTest.equalsWorksInOrderDiffSizeInt");
         }
 
         void equalsWorksOutOfOrderInt() {
@@ -503,11 +428,11 @@ class ArrayTest : public Test_template {
             int i1 = 5;
             int i2 = 10;
 
-            arr0->put(1, i1);
-            arr0->put(0, i2);
+            arr0->push_back(i1);
+            arr0->push_back(i2);
 
-            arr1->put(0, i1);
-            arr1->put(1, i2);
+            arr1->push_back(i2);
+            arr1->push_back(i1);
 
             t_false(arr0->equals(arr1));
             t_false(arr1->equals(arr0));
@@ -520,17 +445,17 @@ class ArrayTest : public Test_template {
 
         // Float
 
-        void getAndPutWorkFloat() {
+        void getAndsetWorkFloat() {
             FloatArray* arr = new FloatArray();
             float f1 = 5.0;
 
-            arr->put(4, f1);
+            arr->push_back(f1);
 
-            t_true(f1 == arr->get(4));
-            t_true(arr->get(4) == f1);
+            t_true(f1 == arr->get(0));
+            t_true(arr->get(0) == f1);
 
             delete arr;
-            OK("ArrayTest.getAndPutWorkFloat");
+            OK("ArrayTest.getAndsetWorkFloat");
         }
 
         void pushBackFloat() {
@@ -547,27 +472,27 @@ class ArrayTest : public Test_template {
             OK("ArrayTest.pushBackFloat");
         }
 
-        void putReplacesObjectFloat() {
+        void setReplacesObjectFloat() {
             FloatArray* arr = new FloatArray();
 
             float f1 = 5.0;
             float f2 = 10.0;
 
-            arr->put(4, f1);
-            arr->put(4, f2);
+            arr->push_back(f1);
+            arr->set(0, f2);
 
-            t_true(arr->get(4) == f2);
-            t_true(f2 == arr->get(4));
+            t_true(arr->get(0) == f2);
+            t_true(f2 == arr->get(0));
 
             delete arr;
-            OK("ArrayTest.putReplacesObjectFloat");
+            OK("ArrayTest.setReplacesObjectFloat");
         }
 
         void indexOfFindsObjectFloat() {
             FloatArray* arr = new FloatArray();
             float f1 = 5.0;
 
-            arr->put(4, f1);
+            arr->push_back(f1);
 
             t_true(arr->indexOf(f1) == 4);
 
@@ -592,11 +517,11 @@ class ArrayTest : public Test_template {
             float f1 = 5.0;
             float f2 = 10.0;
 
-            arr0->put(1, f1);
-            arr0->put(0, f2);
+            arr0->push_back(f1);
+            arr0->push_back(f2);
 
-            arr1->put(1, f1);
-            arr1->put(0, f2);
+            arr1->push_back(f1);
+            arr1->push_back(f2);
             
             t_true(arr0->equals(arr1));
             t_true(arr1->equals(arr0));
@@ -606,28 +531,6 @@ class ArrayTest : public Test_template {
             delete arr1;
 
             OK("ArrayTest.equalsWorksInOrderFloat");
-        }
-
-        void equalsWorksInOrderDiffSizeFloat() {
-            FloatArray* arr0 = new FloatArray();
-            FloatArray* arr1 = new FloatArray();
-
-            float f1 = 5.0;
-            float f2 = 10.0;
-
-            arr0->put(1, f1);
-            arr0->put(0, f2);
-
-            arr1->put(1, f1);
-            arr1->put(0, f2);
-
-            t_true(arr0->equals(arr1));
-            t_true(arr1->equals(arr0));
-
-            delete arr0;
-            delete arr1;
-
-            OK("ArrayTest.equalsWorksInOrderDiffSizeFloat");
         }
 
         void equalsWorksOutOfOrderFloat() {
@@ -640,11 +543,11 @@ class ArrayTest : public Test_template {
             float f1 = 5.0;
             float f2 = 10.0;
 
-            arr0->put(1, f1);
-            arr0->put(0, f2);
+            arr0->push_back(f1);
+            arr0->push_back(f2);
 
-            arr1->put(0, f1);
-            arr1->put(1, f2);
+            arr1->push_back(f2);
+            arr1->push_back(f1);
 
             t_false(arr0->equals(arr1));
             t_false(arr1->equals(arr0));
@@ -657,17 +560,17 @@ class ArrayTest : public Test_template {
 
         // Bool
 
-        void getAndPutWorkBool() {
+        void getAndsetWorkBool() {
             BoolArray* arr = new BoolArray();
             bool b1 = true;
 
-            arr->put(4, b1);
+            arr->push_back(b1);
 
-            t_true(b1 == arr->get(4));
-            t_true(arr->get(4) == b1);
+            t_true(b1 == arr->get(0));
+            t_true(arr->get(0) == b1);
 
             delete arr;
-            OK("ArrayTest.getAndPutWorkBool");
+            OK("ArrayTest.getAndsetWorkBool");
         }
 
         void pushBackBool() {
@@ -684,27 +587,27 @@ class ArrayTest : public Test_template {
             OK("ArrayTest.pushBackBool");
         }
 
-        void putReplacesObjectBool() {
+        void setReplacesObjectBool() {
             BoolArray* arr = new BoolArray();
 
             bool b1 = true;
             bool b2 = false;
 
-            arr->put(4, b1);
-            arr->put(4, b2);
+            arr->push_back(b1);
+            arr->set(0, b2);
 
-            t_true(arr->get(4) == b2);
-            t_true(b2 == arr->get(4));
+            t_true(arr->get(0) == b2);
+            t_true(b2 == arr->get(0));
 
             delete arr;
-            OK("ArrayTest.putReplacesObjectBool");
+            OK("ArrayTest.setReplacesObjectBool");
         }
 
         void indexOfFindsObjectBool() {
             BoolArray* arr = new BoolArray();
             bool b1 = true;
 
-            arr->put(4, b1);
+            arr->push_back(b1);
 
             t_true(arr->indexOf(b1) == 4);
 
@@ -729,11 +632,11 @@ class ArrayTest : public Test_template {
             bool b1 = true;
             bool b2 = false;
 
-            arr0->put(1, b1);
-            arr0->put(0, b2);
+            arr0->push_back(b1);
+            arr0->push_back(b2);
 
-            arr1->put(1, b1);
-            arr1->put(0, b2);
+            arr1->push_back(b1);
+            arr1->push_back(b2);
             
             t_true(arr0->equals(arr1));
             t_true(arr1->equals(arr0));
@@ -743,28 +646,6 @@ class ArrayTest : public Test_template {
             delete arr1;
 
             OK("ArrayTest.equalsWorksInOrderBool");
-        }
-
-        void equalsWorksInOrderDiffSizeBool() {
-            BoolArray* arr0 = new BoolArray();
-            BoolArray* arr1 = new BoolArray();
-
-            bool b1 = true;
-            bool b2 = false;
-
-            arr0->put(1, b1);
-            arr0->put(0, b2);
-
-            arr1->put(1, b1);
-            arr1->put(0, b2);
-
-            t_true(arr0->equals(arr1));
-            t_true(arr1->equals(arr0));
-
-            delete arr0;
-            delete arr1;
-
-            OK("ArrayTest.equalsWorksInOrderDiffSizeBool");
         }
 
         void equalsWorksOutOfOrderBool() {
@@ -777,11 +658,11 @@ class ArrayTest : public Test_template {
             bool b1 = true;
             bool b2 = false;
 
-            arr0->put(1, b1);
-            arr0->put(0, b2);
+            arr0->push_back(b1);
+            arr0->push_back(b2);
 
-            arr1->put(0, b1);
-            arr1->put(1, b2);
+            arr1->push_back(b2);
+            arr1->push_back(b1);
 
             t_false(arr0->equals(arr1));
             t_false(arr1->equals(arr0));
