@@ -99,7 +99,7 @@ class ArrayTest : public Test_template {
             t_true(arr->get(0)->equals(str));
             t_true(str->equals(arr->get(0)));
             t_true(str == arr->get(0));
-            t_true(arr->size == 1);
+            t_true(arr->size() == 1);
 
             delete arr;
             delete str;
@@ -229,7 +229,7 @@ class ArrayTest : public Test_template {
             t_true(arr->get(0)->equals(str));
             t_true(str->equals(arr->get(0)));
             t_true(str == arr->get(0));
-            t_true(arr->size == 1);
+            t_true(arr->size() == 1);
 
             delete arr;
             delete str;
@@ -351,7 +351,7 @@ class ArrayTest : public Test_template {
 
             t_true(i1 == arr->get(0));
             t_true(arr->get(0) == i1);
-            t_true(arr->size == 1);
+            t_true(arr->size() == 1);
 
             delete arr;
             OK("ArrayTest.pushBackInt");
@@ -466,7 +466,7 @@ class ArrayTest : public Test_template {
 
             t_true(f1 == arr->get(0));
             t_true(arr->get(0) == f1);
-            t_true(arr->size == 1);
+            t_true(arr->size() == 1);
 
             delete arr;
             OK("ArrayTest.pushBackFloat");
@@ -581,7 +581,7 @@ class ArrayTest : public Test_template {
 
             t_true(b1 == arr->get(0));
             t_true(arr->get(0) == b1);
-            t_true(arr->size == 1);
+            t_true(arr->size() == 1);
 
             delete arr;
             OK("ArrayTest.pushBackBool");
