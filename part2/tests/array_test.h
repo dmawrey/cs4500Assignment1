@@ -128,7 +128,7 @@ class ArrayTest : public Test_template {
 
             arr->push_back(str);
 
-            t_true(arr->indexOf(str) == 0);
+            t_true(arr->index_of(str) == 0);
 
             delete arr;
             delete str;
@@ -139,7 +139,7 @@ class ArrayTest : public Test_template {
             ObjectArray* arr = new ObjectArray();
             String* str = new String("HI");
 
-            t_true(arr->indexOf(str) == arr->size());
+            t_true(arr->index_of(str) == arr->size());
 
             delete arr;
             delete str;
@@ -260,7 +260,7 @@ class ArrayTest : public Test_template {
 
             arr->push_back(str);
 
-            t_true(arr->indexOf(str) == 0);
+            t_true(arr->index_of(str) == 0);
 
             delete arr;
             delete str;
@@ -271,7 +271,7 @@ class ArrayTest : public Test_template {
             StringArray* arr = new StringArray();
             String* str = new String("HI");
 
-            t_true(arr->indexOf(str) == arr->size());
+            t_true(arr->index_of(str) == arr->size());
 
             delete arr;
             delete str;
@@ -379,7 +379,7 @@ class ArrayTest : public Test_template {
 
             arr->push_back(i1);
 
-            t_true(arr->indexOf(i1) == 4);
+            t_true(arr->index_of(i1) == 4);
 
             delete arr;
             OK("ArrayTest.indexOfFindsObjectInt");
@@ -389,7 +389,7 @@ class ArrayTest : public Test_template {
             IntArray* arr = new IntArray();
             int i1 = 5;
 
-            t_true(arr->indexOf(i1) == arr->size());
+            t_true(arr->index_of(i1) == arr->size());
 
             delete arr;
             OK("ArrayTest.indexOfReturnsSizeWhenMissingInt");
@@ -494,7 +494,7 @@ class ArrayTest : public Test_template {
 
             arr->push_back(f1);
 
-            t_true(arr->indexOf(f1) == 4);
+            t_true(arr->index_of(f1) == 4);
 
             delete arr;
             OK("ArrayTest.indexOfFindsObjectFloat");
@@ -504,7 +504,7 @@ class ArrayTest : public Test_template {
             FloatArray* arr = new FloatArray();
             float f1 = 5.0;
 
-            t_true(arr->indexOf(f1) == arr->size());
+            t_true(arr->index_of(f1) == arr->size());
 
             delete arr;
             OK("ArrayTest.indexOfReturnsSizeWhenMissingFloat");
@@ -609,7 +609,7 @@ class ArrayTest : public Test_template {
 
             arr->push_back(b1);
 
-            t_true(arr->indexOf(b1) == 4);
+            t_true(arr->index_of(b1) == 4);
 
             delete arr;
             OK("ArrayTest.indexOfFindsObjectBool");
@@ -619,7 +619,7 @@ class ArrayTest : public Test_template {
             BoolArray* arr = new BoolArray();
             bool b1 = true;
 
-            t_true(arr->indexOf(b1) == arr->size());
+            t_true(arr->index_of(b1) == arr->size());
 
             delete arr;
             OK("ArrayTest.indexOfReturnsSizeWhenMissingBool");
