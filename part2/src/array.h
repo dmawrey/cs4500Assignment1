@@ -64,7 +64,7 @@ class ObjectArray: public Object {
          * @param obj The object to find in the array
          * @return The first index of the object. size() if not found
          */
-        size_t indexOf(Object* obj) {}
+        size_t index_of(Object* obj) {}
 
 };
 
@@ -128,7 +128,7 @@ class StringArray: public Object {
          * @param givenString The object to find in the array
          * @return The first index of the object. size() if not found
          */
-        size_t indexOf(String* givenString) {}
+        size_t index_of(String* givenString) {}
 
 };
 
@@ -191,7 +191,7 @@ class IntArray: public Object {
          * @param givenInt The int to find in the array
          * @return The first index of the object. size() if not found
          */
-        size_t indexOf(int givenInt) {}
+        size_t index_of(int givenInt) {}
 };
 
 /**
@@ -253,7 +253,7 @@ class FloatArray: public Object {
          * @param givenFloat The float to find in the array
          * @return The first index of the object. size() if not found
          */
-        size_t indexOf(float givenFloat) {}
+        size_t index_of(float givenFloat) {}
 };
 
 /**
@@ -315,6 +315,6 @@ class BoolArray: public Object {
          * @param givenBool The boolean to find in the array
          * @return The first index of the object. size() if not found
          */
-        size_t indexOf(bool givenBool) {}
+        size_t index_of(bool givenBool) {}
 };
 
