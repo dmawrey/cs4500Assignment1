@@ -1,675 +1,810 @@
 #pragma once
 
-#include "test_util.h"
+#include "../array.h"
+#include "../object.h"
+#include "../string.h"
 #include "test_template.h"
-
-#include "../src/object.h"
-#include "../src/string.h"
-#include "../src/array.h"
+#include "test_util.h"
 
 class ArrayTest : public Test_template {
+ public:
+  static const int _stressTestVal = 10000;
+
+  virtual void run() {
+    // OBJECT LIST
+
+    testConstructorInitsToNullptrObj();
+    getAndsetWorkObj();
+    pushBackObj();
+    setReplacesObjectObj();
+    indexOfFindsObjectObj();
+    indexOfReturnsSizeWhenMissingObj();
+    equalsWorksInOrderObj();
+    equalsWorksOutOfOrderObj();
+
+    // STRING LIST
+
+    testConstructorInitsToNullptrStr();
+    getAndsetWorkStr();
+    pushBackStr();
+    setReplacesObjectStr();
+    indexOfFindsObjectStr();
+    indexOfReturnsSizeWhenMissingStr();
+    equalsWorksInOrderStr();
+    equalsWorksOutOfOrderStr();
+    arrayStressTestStr();
+
+    // Int LIST
+
+    getAndsetWorkInt();
+    pushBackInt();
+    setReplacesObjectInt();
+    indexOfFindsObjectInt();
+    indexOfReturnsSizeWhenMissingInt();
+    equalsWorksInOrderInt();
+    equalsWorksOutOfOrderInt();
+    arrayStressTestInt();
+
+    // Float LIST
+
+    getAndsetWorkFloat();
+    pushBackFloat();
+    setReplacesObjectFloat();
+    indexOfFindsObjectFloat();
+    indexOfReturnsSizeWhenMissingFloat();
+    equalsWorksInOrderFloat();
+    equalsWorksOutOfOrderFloat();
+    arrayStressTestFloat();
+
+    // Bool LIST
+
+    getAndsetWorkBool();
+    pushBackBool();
+    setReplacesObjectBool();
+    indexOfFindsObjectBool();
+    indexOfReturnsSizeWhenMissingBool();
+    equalsWorksInOrderBool();
+    equalsWorksOutOfOrderBool();
+    arrayStressTestBool();
+  }
+
+  // OBJECT LIST
+
+  void testConstructorInitsToNullptrObj() {
+    ObjectArray* arr = new ObjectArray();
+    for (int i = 0; i < 5; i++) {
+      t_true(arr->get(i) == nullptr);
+    }
+
+    delete arr;
+    OK("ArrayTest.testConstructorInitsToNullptrObj");
+  }
+
+  void getAndsetWorkObj() {
+    ObjectArray* arr = new ObjectArray();
+    String* str = new String("HI");
+
+    arr->push_back(str);
+
+    t_true(arr->get(0)->equals(str));
+    t_true(str->equals(arr->get(0)));
+    t_true(str == arr->get(0));
+
+    delete arr;
+    delete str;
+    OK("ArrayTest.getAndsetWorkObj");
+  }
+
+  void pushBackObj() {
+    ObjectArray* arr = new ObjectArray();
+    String* str = new String("HI");
+
+    arr->push_back(str);
+
+    t_true(arr->get(0)->equals(str));
+    t_true(str->equals(arr->get(0)));
+    t_true(str == arr->get(0));
+    t_true(arr->size() == 1);
+
+    delete arr;
+    delete str;
+    OK("ArrayTest.pushBackObj");
+  }
 
-    public:
-
-        virtual void run() {
-            // OBJECT LIST
-
-            testConstructorInitsToNullptrObj();
-            getAndsetWorkObj();
-            pushBackObj();
-            setReplacesObjectObj();
-            indexOfFindsObjectObj();
-            indexOfReturnsSizeWhenMissingObj();
-            equalsWorksInOrderObj();
-            equalsWorksOutOfOrderObj();
-
-            // STRING LIST
-
-            testConstructorInitsToNullptrStr();
-            getAndsetWorkStr();
-            pushBackStr();
-            setReplacesObjectStr();
-            indexOfFindsObjectStr();
-            indexOfReturnsSizeWhenMissingStr();
-            equalsWorksInOrderStr();
-            equalsWorksOutOfOrderStr();
-
-            // Int LIST
-
-            getAndsetWorkInt();
-            pushBackInt();
-            setReplacesObjectInt();
-            indexOfFindsObjectInt();
-            indexOfReturnsSizeWhenMissingInt();
-            equalsWorksInOrderInt();
-            equalsWorksOutOfOrderInt();
-
-            // Float LIST
-
-            getAndsetWorkFloat();
-            pushBackFloat();
-            setReplacesObjectFloat();
-            indexOfFindsObjectFloat();
-            indexOfReturnsSizeWhenMissingFloat();
-            equalsWorksInOrderFloat();
-            equalsWorksOutOfOrderFloat();
-
-            // Bool LIST
-
-            getAndsetWorkBool();
-            pushBackBool();
-            setReplacesObjectBool();
-            indexOfFindsObjectBool();
-            indexOfReturnsSizeWhenMissingBool();
-            equalsWorksInOrderBool();
-            equalsWorksOutOfOrderBool();
-        }
-
-        // OBJECT LIST
-
-       void testConstructorInitsToNullptrObj() {
-            ObjectArray* arr = new ObjectArray();
-            for (int i = 0; i < 5; i++) { t_true(arr->get(i) == nullptr); }
-
-            delete arr;
-            OK("ArrayTest.testConstructorInitsToNullptrObj");
-       }
-
-        void getAndsetWorkObj() {
-            ObjectArray* arr = new ObjectArray();
-            String* str = new String("HI");
-
-            arr->push_back(str);
-
-            t_true(arr->get(0)->equals(str));
-            t_true(str->equals(arr->get(0)));
-            t_true(str == arr->get(0));
-
-            delete arr;
-            delete str;
-            OK("ArrayTest.getAndsetWorkObj");
-        }
-
-        void pushBackObj() {
-            ObjectArray* arr = new ObjectArray();
-            String* str = new String("HI");
-
-            arr->push_back(str);
-
-            t_true(arr->get(0)->equals(str));
-            t_true(str->equals(arr->get(0)));
-            t_true(str == arr->get(0));
-            t_true(arr->size == 1);
-
-            delete arr;
-            delete str;
-            OK("ArrayTest.pushBackObj");
-        }
-
-        void setReplacesObjectObj() {
-            ObjectArray* arr = new ObjectArray();
-            String* str = new String("HI");
+  void setReplacesObjectObj() {
+    ObjectArray* arr = new ObjectArray();
+    // fix miswritten test
+    String* str1 = new String("HI");
+    String* str2 = new String("BYE");
 
-            arr->push_back(str);
-            arr->set(0, arr);
+    arr->push_back(str1);
+    arr->set(0, str2);
 
-            t_true(arr->get(0)->equals(arr));
-            t_true(arr->equals(arr->get(0)));
-            t_true(arr == arr->get(0));
+    t_true(arr->get(0)->equals(str2));
+    t_true(str2->equals(arr->get(0)));
 
-            delete arr;
-            delete str;
-            OK("ArrayTest.setReplacesObjectObj");
-        }
+    delete arr;
+    delete str1;
+    delete str2;
+    // end fix
+    OK("ArrayTest.setReplacesObjectObj");
+  }
 
-        void indexOfFindsObjectObj() {
-            ObjectArray* arr = new ObjectArray();
-            String* str = new String("HI");
+  void indexOfFindsObjectObj() {
+    ObjectArray* arr = new ObjectArray();
+    String* str = new String("HI");
 
-            arr->push_back(str);
+    arr->push_back(str);
 
-            t_true(arr->index_of(str) == 0);
+    t_true(arr->index_of(str) == 0);
 
-            delete arr;
-            delete str;
-            OK("ArrayTest.indexOfFindsObjectObj");
-        }
+    delete arr;
+    delete str;
+    OK("ArrayTest.indexOfFindsObjectObj");
+  }
 
-        void indexOfReturnsSizeWhenMissingObj() {
-            ObjectArray* arr = new ObjectArray();
-            String* str = new String("HI");
+  void indexOfReturnsSizeWhenMissingObj() {
+    ObjectArray* arr = new ObjectArray();
+    String* str = new String("HI");
 
-            t_true(arr->index_of(str) == arr->size());
+    t_true(arr->index_of(str) == arr->size());
 
-            delete arr;
-            delete str;
-            OK("ArrayTest.indexOfReturnsSizeWhenMissingObj");
-        }
+    delete arr;
+    delete str;
+    OK("ArrayTest.indexOfReturnsSizeWhenMissingObj");
+  }
 
-        void equalsWorksInOrderObj() {
-            ObjectArray* arr0 = new ObjectArray();
-            ObjectArray* arr1 = new ObjectArray();
+  void equalsWorksInOrderObj() {
+    ObjectArray* arr0 = new ObjectArray();
+    ObjectArray* arr1 = new ObjectArray();
 
-            String* str0 = new String("HI");
-            String* str1 = new String("BYE");
+    String* str0 = new String("HI");
+    String* str1 = new String("BYE");
 
-            arr0->push_back(str0);
-            arr0->push_back(str1);
-            
-            arr1->push_back(str0);
-            arr1->push_back(str1);
-            
-            t_true(arr0->equals(arr1));
-            t_true(arr1->equals(arr0));
-            t_true(arr1->hash() == arr0->hash());
+    arr0->push_back(str0);
+    arr0->push_back(str1);
 
-            delete arr0;
-            delete arr1;
-            delete str0;
-            delete str1;
+    arr1->push_back(str0);
+    arr1->push_back(str1);
 
-            OK("ArrayTest.equalsWorksInOrderObj");
-        }
+    t_true(arr0->equals(arr1));
+    t_true(arr1->equals(arr0));
+    t_true(arr1->hash() == arr0->hash());
 
-        void equalsWorksOutOfOrderObj() {
-            ObjectArray* arr0 = new ObjectArray();
-            ObjectArray* arr1 = new ObjectArray();
+    delete arr0;
+    delete arr1;
+    delete str0;
+    delete str1;
 
-            String* str0 = new String("HI");
-            String* str1 = new String("BYE");
+    OK("ArrayTest.equalsWorksInOrderObj");
+  }
 
-            arr0->push_back(str0);
-            arr0->push_back(str1);
+  void equalsWorksOutOfOrderObj() {
+    ObjectArray* arr0 = new ObjectArray();
+    ObjectArray* arr1 = new ObjectArray();
 
-            arr1->push_back(str1);
-            arr1->push_back(str0);
+    String* str0 = new String("HI");
+    String* str1 = new String("BYE");
 
-            t_false(arr0->equals(arr1));
-            t_false(arr1->equals(arr0));
+    arr0->push_back(str0);
+    arr0->push_back(str1);
 
-            delete arr0;
-            delete arr1;
-            delete str0;
-            delete str1;
+    arr1->push_back(str1);
+    arr1->push_back(str0);
 
-            OK("ArrayTest.equalsWorksInOrderObj");
-        }
+    t_false(arr0->equals(arr1));
+    t_false(arr1->equals(arr0));
 
-        // String
+    delete arr0;
+    delete arr1;
+    delete str0;
+    delete str1;
 
-        void testConstructorInitsToNullptrStr() {
-            StringArray* arr = new StringArray();
-            for (int i = 0; i < 5; i++) { t_true(arr->get(i) == nullptr); }
+    OK("ArrayTest.equalsWorksInOrderObj");
+  }
 
-            delete arr;
-            OK("ArrayTest.testConstructorInitsToNullptrStr");
-        }
+  // String
 
-        void getAndsetWorkStr() {
-            StringArray* arr = new StringArray();
-            String* str = new String("HI");
+  void testConstructorInitsToNullptrStr() {
+    StringArray* arr = new StringArray();
+    for (int i = 0; i < 5; i++) {
+      t_true(arr->get(i) == nullptr);
+    }
 
-            arr->push_back(str);
+    delete arr;
+    OK("ArrayTest.testConstructorInitsToNullptrStr");
+  }
 
-            t_true(arr->get(0)->equals(str));
-            t_true(str->equals(arr->get(0)));
-            t_true(str == arr->get(0));
+  void getAndsetWorkStr() {
+    StringArray* arr = new StringArray();
+    String* str = new String("HI");
 
-            delete arr;
-            delete str;
-            OK("ArrayTest.getAndsetWorkStr");
-        }
+    arr->push_back(str);
 
-        void pushBackStr() {
-            StringArray* arr = new StringArray();
-            String* str = new String("HI");
+    t_true(arr->get(0)->equals(str));
+    t_true(str->equals(arr->get(0)));
+    t_true(str == arr->get(0));
 
-            arr->push_back(str);
+    delete arr;
+    delete str;
+    OK("ArrayTest.getAndsetWorkStr");
+  }
 
-            t_true(arr->get(0)->equals(str));
-            t_true(str->equals(arr->get(0)));
-            t_true(str == arr->get(0));
-            t_true(arr->size == 1);
+  void pushBackStr() {
+    StringArray* arr = new StringArray();
+    String* str = new String("HI");
 
-            delete arr;
-            delete str;
-            OK("ArrayTest.pushBackStr");
-        }
+    arr->push_back(str);
 
-        void setReplacesObjectStr() {
-            StringArray* arr = new StringArray();
-            String* str0 = new String("HI");
-            String* str1 = new String("BYE");
+    t_true(arr->get(0)->equals(str));
+    t_true(str->equals(arr->get(0)));
+    t_true(str == arr->get(0));
+    t_true(arr->size() == 1);
 
-            arr->push_back(str0);
-            arr->set(0, str1);
+    delete arr;
+    delete str;
+    OK("ArrayTest.pushBackStr");
+  }
 
-            t_true(arr->get(0)->equals(str1));
-            t_true(str1->equals(arr->get(0)));
-            t_true(str1 == arr->get(0));
+  void setReplacesObjectStr() {
+    StringArray* arr = new StringArray();
+    String* str0 = new String("HI");
+    String* str1 = new String("BYE");
 
-            delete arr;
-            delete str0;
-            delete str1;
-            OK("ArrayTest.setReplacesObjectStr");
-        }
+    arr->push_back(str0);
+    arr->set(0, str1);
 
-        void indexOfFindsObjectStr() {
-            StringArray* arr = new StringArray();
-            String* str = new String("HI");
+    t_true(arr->get(0)->equals(str1));
+    t_true(str1->equals(arr->get(0)));
+    t_true(str1 == arr->get(0));
 
-            arr->push_back(str);
+    delete arr;
+    delete str0;
+    delete str1;
+    OK("ArrayTest.setReplacesObjectStr");
+  }
 
-            t_true(arr->index_of(str) == 0);
+  void indexOfFindsObjectStr() {
+    StringArray* arr = new StringArray();
+    String* str = new String("HI");
 
-            delete arr;
-            delete str;
-            OK("ArrayTest.indexOfFindsObjectStr");
-        }
+    arr->push_back(str);
 
-        void indexOfReturnsSizeWhenMissingStr() {
-            StringArray* arr = new StringArray();
-            String* str = new String("HI");
+    t_true(arr->index_of(str) == 0);
 
-            t_true(arr->index_of(str) == arr->size());
+    delete arr;
+    delete str;
+    OK("ArrayTest.indexOfFindsObjectStr");
+  }
 
-            delete arr;
-            delete str;
-            OK("ArrayTest.indexOfReturnsSizeWhenMissingStr");
-        }
+  void indexOfReturnsSizeWhenMissingStr() {
+    StringArray* arr = new StringArray();
+    String* str = new String("HI");
 
-        void equalsWorksInOrderStr() {
-            StringArray* arr0 = new StringArray();
-            StringArray* arr1 = new StringArray();
+    t_true(arr->index_of(str) == arr->size());
 
-            String* str0 = new String("HI");
-            String* str1 = new String("BYE");
+    delete arr;
+    delete str;
+    OK("ArrayTest.indexOfReturnsSizeWhenMissingStr");
+  }
 
-            arr0->push_back(str0);
-            arr0->push_back(str1);
+  void equalsWorksInOrderStr() {
+    StringArray* arr0 = new StringArray();
+    StringArray* arr1 = new StringArray();
 
-            arr1->push_back(str0);
-            arr1->push_back(str1);
+    String* str0 = new String("HI");
+    String* str1 = new String("BYE");
 
-            t_true(arr0->equals(arr1));
-            t_true(arr1->equals(arr0));
-            t_true(arr1->hash() == arr0->hash());
+    arr0->push_back(str0);
+    arr0->push_back(str1);
 
-            delete arr0;
-            delete arr1;
-            delete str0;
-            delete str1;
+    arr1->push_back(str0);
+    arr1->push_back(str1);
 
-            OK("ArrayTest.equalsWorksInOrderStr");
-        }
+    t_true(arr0->equals(arr1));
+    t_true(arr1->equals(arr0));
+    t_true(arr1->hash() == arr0->hash());
 
-        void equalsWorksOutOfOrderStr() {
-            StringArray* arr0 = new StringArray();
-            StringArray* arr1 = new StringArray();
+    delete arr0;
+    delete arr1;
+    delete str0;
+    delete str1;
 
-            String* str0 = new String("HI");
-            String* str1 = new String("BYE");
+    OK("ArrayTest.equalsWorksInOrderStr");
+  }
 
-            arr0->push_back(str0);
-            arr0->push_back(str1);
+  void equalsWorksOutOfOrderStr() {
+    StringArray* arr0 = new StringArray();
+    StringArray* arr1 = new StringArray();
 
-            arr1->push_back(str1);
-            arr1->push_back(str0);
+    String* str0 = new String("HI");
+    String* str1 = new String("BYE");
 
-            t_false(arr0->equals(arr1));
-            t_false(arr1->equals(arr0));
+    arr0->push_back(str0);
+    arr0->push_back(str1);
 
-            delete arr0;
-            delete arr1;
-            delete str0;
-            delete str1;
+    arr1->push_back(str1);
+    arr1->push_back(str0);
 
-            OK("ArrayTest.equalsWorksInOrderStr");
-        }
+    t_false(arr0->equals(arr1));
+    t_false(arr1->equals(arr0));
 
+    delete arr0;
+    delete arr1;
+    delete str0;
+    delete str1;
 
-        // Int
+    OK("ArrayTest.equalsWorksInOrderStr");
+  }
 
-        void getAndsetWorkInt() {
-            IntArray* arr = new IntArray();
-            int i1 = 5;
+  void arrayStressTestStr() {
+    StringArray* arr0 = new StringArray();
 
-            arr->push_back(i1);
+    // Testing push_back
+    char buffer[100];
+    for (int i = 0; i < _stressTestVal; i++) {
+      sprintf(buffer, "test%i", i);
+      String* currStr = new String(buffer);
+      arr0->push_back(currStr);
+    }
 
-            t_true(i1 == arr->get(0));
-            t_true(arr->get(0) == i1);
+    // Testing get
+    t_true(arr0->size() == _stressTestVal);
+    arr0->get(38);
+    t_true(strcmp(arr0->get(38)->value(), "test38") == 0);
 
-            delete arr;
-            OK("ArrayTest.getAndsetWorkInt");
-        }
+    // Testing set
+    String* test38 = arr0->get(38);
+    String* replace38 = new String("replace38");
+    arr0->set(38, replace38);
+    t_true(strcmp(arr0->get(38)->value(), "replace38") == 0);
+    t_true(arr0->get(38)->hash() == replace38->hash());
 
-        void pushBackInt() {
-            IntArray* arr = new IntArray();
-            int i1 = 5;
+    // Testing index_of
+    t_true(arr0->index_of(test38) >= arr0->size());
+    t_true(arr0->index_of(replace38) == 38);
 
-            arr->push_back(i1);
+    delete test38;
+    for (int i = 0; i < _stressTestVal; i++) {
+      delete arr0->get(i);
+    }
+    delete arr0;
+    OK("ArrayTest.arrayStressTestStr");
+  }
 
-            t_true(i1 == arr->get(0));
-            t_true(arr->get(0) == i1);
-            t_true(arr->size == 1);
+  // Int
 
-            delete arr;
-            OK("ArrayTest.pushBackInt");
-        }
+  void getAndsetWorkInt() {
+    IntArray* arr = new IntArray();
+    int i1 = 5;
 
-        void setReplacesObjectInt() {
-            IntArray* arr = new IntArray();
+    arr->push_back(i1);
 
-            int i1 = 5;
-            int i2 = 10;
+    t_true(i1 == arr->get(0));
+    t_true(arr->get(0) == i1);
 
-            arr->push_back(i1);
-            arr->set(0, i2);
+    delete arr;
+    OK("ArrayTest.getAndsetWorkInt");
+  }
 
-            t_true(arr->get(0) == i2);
-            t_true(i2 == arr->get(0));
+  void pushBackInt() {
+    IntArray* arr = new IntArray();
+    int i1 = 5;
 
-            delete arr;
-            OK("ArrayTest.setReplacesObjectInt");
-        }
+    arr->push_back(i1);
 
-        void indexOfFindsObjectInt() {
-            IntArray* arr = new IntArray();
-            int i1 = 5;
+    t_true(i1 == arr->get(0));
+    t_true(arr->get(0) == i1);
+    t_true(arr->size() == 1);
 
-            arr->push_back(i1);
+    delete arr;
+    OK("ArrayTest.pushBackInt");
+  }
 
-            t_true(arr->index_of(i1) == 4);
+  void setReplacesObjectInt() {
+    IntArray* arr = new IntArray();
 
-            delete arr;
-            OK("ArrayTest.indexOfFindsObjectInt");
-        }
+    int i1 = 5;
+    int i2 = 10;
 
-        void indexOfReturnsSizeWhenMissingInt() {
-            IntArray* arr = new IntArray();
-            int i1 = 5;
+    arr->push_back(i1);
+    arr->set(0, i2);
 
-            t_true(arr->index_of(i1) == arr->size());
+    t_true(arr->get(0) == i2);
+    t_true(i2 == arr->get(0));
 
-            delete arr;
-            OK("ArrayTest.indexOfReturnsSizeWhenMissingInt");
-        }
+    delete arr;
+    OK("ArrayTest.setReplacesObjectInt");
+  }
 
-        void equalsWorksInOrderInt() {
-            IntArray* arr0 = new IntArray();
-            IntArray* arr1 = new IntArray();
+  void indexOfFindsObjectInt() {
+    IntArray* arr = new IntArray();
+    int i1 = 5;
 
-            int i1 = 5;
-            int i2 = 10;
+    // fix miswritten test
+    arr->push_back(1);
+    arr->push_back(2);
+    arr->push_back(3);
+    arr->push_back(4);
+    // end fix
+    arr->push_back(i1);
 
-            arr0->push_back(i1);
-            arr0->push_back(i2);
+    t_true(arr->index_of(i1) == 4);
 
-            arr1->push_back(i1);
-            arr1->push_back(i2);
+    delete arr;
+    OK("ArrayTest.indexOfFindsObjectInt");
+  }
 
-            t_true(arr0->equals(arr1));
-            t_true(arr1->equals(arr0));
-            t_true(arr1->hash() == arr0->hash());
+  void indexOfReturnsSizeWhenMissingInt() {
+    IntArray* arr = new IntArray();
+    int i1 = 5;
 
-            delete arr0;
-            delete arr1;
+    t_true(arr->index_of(i1) == arr->size());
 
-            OK("ArrayTest.equalsWorksInOrderInt");
-        }
+    delete arr;
+    OK("ArrayTest.indexOfReturnsSizeWhenMissingInt");
+  }
 
-        void equalsWorksOutOfOrderInt() {
-            IntArray* arr0 = new IntArray();
-            IntArray* arr1 = new IntArray();
+  void equalsWorksInOrderInt() {
+    IntArray* arr0 = new IntArray();
+    IntArray* arr1 = new IntArray();
 
-            String* str0 = new String("HI");
-            String* str1 = new String("BYE");
+    int i1 = 5;
+    int i2 = 10;
 
-            int i1 = 5;
-            int i2 = 10;
+    arr0->push_back(i1);
+    arr0->push_back(i2);
 
-            arr0->push_back(i1);
-            arr0->push_back(i2);
+    arr1->push_back(i1);
+    arr1->push_back(i2);
 
-            arr1->push_back(i2);
-            arr1->push_back(i1);
+    t_true(arr0->equals(arr1));
+    t_true(arr1->equals(arr0));
+    t_true(arr1->hash() == arr0->hash());
 
-            t_false(arr0->equals(arr1));
-            t_false(arr1->equals(arr0));
+    delete arr0;
+    delete arr1;
 
-            delete arr0;
-            delete arr1;
+    OK("ArrayTest.equalsWorksInOrderInt");
+  }
 
-            OK("ArrayTest.equalsWorksInOrderInt");
-        }
+  void equalsWorksOutOfOrderInt() {
+    IntArray* arr0 = new IntArray();
+    IntArray* arr1 = new IntArray();
 
-        // Float
+    String* str0 = new String("HI");
+    String* str1 = new String("BYE");
 
-        void getAndsetWorkFloat() {
-            FloatArray* arr = new FloatArray();
-            float f1 = 5.0;
+    int i1 = 5;
+    int i2 = 10;
 
-            arr->push_back(f1);
+    arr0->push_back(i1);
+    arr0->push_back(i2);
 
-            t_true(f1 == arr->get(0));
-            t_true(arr->get(0) == f1);
+    arr1->push_back(i2);
+    arr1->push_back(i1);
 
-            delete arr;
-            OK("ArrayTest.getAndsetWorkFloat");
-        }
+    t_false(arr0->equals(arr1));
+    t_false(arr1->equals(arr0));
 
-        void pushBackFloat() {
-            FloatArray* arr = new FloatArray();
-            float f1 = 5.0;
+    delete arr0;
+    delete arr1;
 
-            arr->push_back(f1);
+    OK("ArrayTest.equalsWorksInOrderInt");
+  }
 
-            t_true(f1 == arr->get(0));
-            t_true(arr->get(0) == f1);
-            t_true(arr->size == 1);
+  void arrayStressTestInt() {
+    IntArray* arr0 = new IntArray();
 
-            delete arr;
-            OK("ArrayTest.pushBackFloat");
-        }
+    // Testing push_back
+    for (int i = 0; i < _stressTestVal; i++) {
+      arr0->push_back(i);
+    }
 
-        void setReplacesObjectFloat() {
-            FloatArray* arr = new FloatArray();
+    // Testing get
+    t_true(arr0->size() == _stressTestVal);
+    t_true(arr0->get(38) == 38);
 
-            float f1 = 5.0;
-            float f2 = 10.0;
+    // Testing set
+    arr0->set(38, 100038);
+    t_true(arr0->get(38) == 100038);
 
-            arr->push_back(f1);
-            arr->set(0, f2);
+    // Testing index_of
+    t_true(arr0->index_of(38) == arr0->size());
+    t_true(arr0->index_of(100038) == 38);
 
-            t_true(arr->get(0) == f2);
-            t_true(f2 == arr->get(0));
+    delete arr0;
+    OK("ArrayTest.arrayStressTestInt");
+  }
 
-            delete arr;
-            OK("ArrayTest.setReplacesObjectFloat");
-        }
+  // Float
 
-        void indexOfFindsObjectFloat() {
-            FloatArray* arr = new FloatArray();
-            float f1 = 5.0;
+  void getAndsetWorkFloat() {
+    FloatArray* arr = new FloatArray();
+    float f1 = 5.0;
 
-            arr->push_back(f1);
+    arr->push_back(f1);
 
-            t_true(arr->index_of(f1) == 4);
+    t_true(f1 == arr->get(0));
+    t_true(arr->get(0) == f1);
 
-            delete arr;
-            OK("ArrayTest.indexOfFindsObjectFloat");
-        }
+    delete arr;
+    OK("ArrayTest.getAndsetWorkFloat");
+  }
 
-        void indexOfReturnsSizeWhenMissingFloat() {
-            FloatArray* arr = new FloatArray();
-            float f1 = 5.0;
+  void pushBackFloat() {
+    FloatArray* arr = new FloatArray();
+    float f1 = 5.0;
 
-            t_true(arr->index_of(f1) == arr->size());
+    arr->push_back(f1);
 
-            delete arr;
-            OK("ArrayTest.indexOfReturnsSizeWhenMissingFloat");
-        }
+    t_true(f1 == arr->get(0));
+    t_true(arr->get(0) == f1);
+    t_true(arr->size() == 1);
 
-        void equalsWorksInOrderFloat() {
-            FloatArray* arr0 = new FloatArray();
-            FloatArray* arr1 = new FloatArray();
+    delete arr;
+    OK("ArrayTest.pushBackFloat");
+  }
 
-            float f1 = 5.0;
-            float f2 = 10.0;
+  void setReplacesObjectFloat() {
+    FloatArray* arr = new FloatArray();
 
-            arr0->push_back(f1);
-            arr0->push_back(f2);
+    float f1 = 5.0;
+    float f2 = 10.0;
 
-            arr1->push_back(f1);
-            arr1->push_back(f2);
-            
-            t_true(arr0->equals(arr1));
-            t_true(arr1->equals(arr0));
-            t_true(arr1->hash() == arr0->hash());
+    arr->push_back(f1);
+    arr->set(0, f2);
 
-            delete arr0;
-            delete arr1;
+    t_true(arr->get(0) == f2);
+    t_true(f2 == arr->get(0));
 
-            OK("ArrayTest.equalsWorksInOrderFloat");
-        }
+    delete arr;
+    OK("ArrayTest.setReplacesObjectFloat");
+  }
 
-        void equalsWorksOutOfOrderFloat() {
-            FloatArray* arr0 = new FloatArray();
-            FloatArray* arr1 = new FloatArray();
+  void indexOfFindsObjectFloat() {
+    FloatArray* arr = new FloatArray();
+    float f1 = 5.0;
 
-            String* str0 = new String("HI");
-            String* str1 = new String("BYE");
+    // fixed miswritten test
+    arr->push_back(1);
+    arr->push_back(2);
+    arr->push_back(3);
+    arr->push_back(4);
+    // end fix
+    arr->push_back(f1);
 
-            float f1 = 5.0;
-            float f2 = 10.0;
+    t_true(arr->index_of(f1) == 4);
 
-            arr0->push_back(f1);
-            arr0->push_back(f2);
+    delete arr;
+    OK("ArrayTest.indexOfFindsObjectFloat");
+  }
 
-            arr1->push_back(f2);
-            arr1->push_back(f1);
+  void indexOfReturnsSizeWhenMissingFloat() {
+    FloatArray* arr = new FloatArray();
+    float f1 = 5.0;
 
-            t_false(arr0->equals(arr1));
-            t_false(arr1->equals(arr0));
+    t_true(arr->index_of(f1) == arr->size());
 
-            delete arr0;
-            delete arr1;
+    delete arr;
+    OK("ArrayTest.indexOfReturnsSizeWhenMissingFloat");
+  }
 
-            OK("ArrayTest.equalsWorksInOrderFloat");
-        }
+  void equalsWorksInOrderFloat() {
+    FloatArray* arr0 = new FloatArray();
+    FloatArray* arr1 = new FloatArray();
 
-        // Bool
+    float f1 = 5.0;
+    float f2 = 10.0;
 
-        void getAndsetWorkBool() {
-            BoolArray* arr = new BoolArray();
-            bool b1 = true;
+    arr0->push_back(f1);
+    arr0->push_back(f2);
 
-            arr->push_back(b1);
+    arr1->push_back(f1);
+    arr1->push_back(f2);
 
-            t_true(b1 == arr->get(0));
-            t_true(arr->get(0) == b1);
+    t_true(arr0->equals(arr1));
+    t_true(arr1->equals(arr0));
+    t_true(arr1->hash() == arr0->hash());
 
-            delete arr;
-            OK("ArrayTest.getAndsetWorkBool");
-        }
+    delete arr0;
+    delete arr1;
 
-        void pushBackBool() {
-            BoolArray* arr = new BoolArray();
-            bool b1 = true;
+    OK("ArrayTest.equalsWorksInOrderFloat");
+  }
 
-            arr->push_back(b1);
+  void equalsWorksOutOfOrderFloat() {
+    FloatArray* arr0 = new FloatArray();
+    FloatArray* arr1 = new FloatArray();
 
-            t_true(b1 == arr->get(0));
-            t_true(arr->get(0) == b1);
-            t_true(arr->size == 1);
+    String* str0 = new String("HI");
+    String* str1 = new String("BYE");
 
-            delete arr;
-            OK("ArrayTest.pushBackBool");
-        }
+    float f1 = 5.0;
+    float f2 = 10.0;
 
-        void setReplacesObjectBool() {
-            BoolArray* arr = new BoolArray();
+    arr0->push_back(f1);
+    arr0->push_back(f2);
 
-            bool b1 = true;
-            bool b2 = false;
+    arr1->push_back(f2);
+    arr1->push_back(f1);
 
-            arr->push_back(b1);
-            arr->set(0, b2);
+    t_false(arr0->equals(arr1));
+    t_false(arr1->equals(arr0));
 
-            t_true(arr->get(0) == b2);
-            t_true(b2 == arr->get(0));
+    delete arr0;
+    delete arr1;
 
-            delete arr;
-            OK("ArrayTest.setReplacesObjectBool");
-        }
+    OK("ArrayTest.equalsWorksInOrderFloat");
+  }
 
-        void indexOfFindsObjectBool() {
-            BoolArray* arr = new BoolArray();
-            bool b1 = true;
+  void arrayStressTestFloat() {
+    FloatArray* arr0 = new FloatArray();
 
-            arr->push_back(b1);
+    // Testing push_back
+    for (float i = 0.0; i < _stressTestVal; i++) {
+      arr0->push_back(i);
+    }
 
-            t_true(arr->index_of(b1) == 4);
+    // Testing get
+    t_true(arr0->size() == _stressTestVal);
+    t_true(arr0->get(38) == 38.0);
 
-            delete arr;
-            OK("ArrayTest.indexOfFindsObjectBool");
-        }
+    // Testing set
+    arr0->set(38, 100038.0);
+    t_true(arr0->get(38) == 100038.0);
 
-        void indexOfReturnsSizeWhenMissingBool() {
-            BoolArray* arr = new BoolArray();
-            bool b1 = true;
+    // Testing index_of
+    t_true(arr0->index_of(38.0) == arr0->size());
+    t_true(arr0->index_of(100038.0) == 38);
 
-            t_true(arr->index_of(b1) == arr->size());
+    delete arr0;
+    OK("ArrayTest.arrayStressTestFloat");
+  }
 
-            delete arr;
-            OK("ArrayTest.indexOfReturnsSizeWhenMissingBool");
-        }
+  // Bool
 
-        void equalsWorksInOrderBool() {
-            BoolArray* arr0 = new BoolArray();
-            BoolArray* arr1 = new BoolArray();
+  void getAndsetWorkBool() {
+    BoolArray* arr = new BoolArray();
+    bool b1 = true;
 
-            bool b1 = true;
-            bool b2 = false;
+    arr->push_back(b1);
 
-            arr0->push_back(b1);
-            arr0->push_back(b2);
+    t_true(b1 == arr->get(0));
+    t_true(arr->get(0) == b1);
 
-            arr1->push_back(b1);
-            arr1->push_back(b2);
-            
-            t_true(arr0->equals(arr1));
-            t_true(arr1->equals(arr0));
-            t_true(arr1->hash() == arr0->hash());
+    delete arr;
+    OK("ArrayTest.getAndsetWorkBool");
+  }
 
-            delete arr0;
-            delete arr1;
+  void pushBackBool() {
+    BoolArray* arr = new BoolArray();
+    bool b1 = true;
 
-            OK("ArrayTest.equalsWorksInOrderBool");
-        }
+    arr->push_back(b1);
 
-        void equalsWorksOutOfOrderBool() {
-            BoolArray* arr0 = new BoolArray();
-            BoolArray* arr1 = new BoolArray();
+    t_true(b1 == arr->get(0));
+    t_true(arr->get(0) == b1);
+    t_true(arr->size() == 1);
 
-            String* str0 = new String("HI");
-            String* str1 = new String("BYE");
+    delete arr;
+    OK("ArrayTest.pushBackBool");
+  }
 
-            bool b1 = true;
-            bool b2 = false;
+  void setReplacesObjectBool() {
+    BoolArray* arr = new BoolArray();
 
-            arr0->push_back(b1);
-            arr0->push_back(b2);
+    bool b1 = true;
+    bool b2 = false;
 
-            arr1->push_back(b2);
-            arr1->push_back(b1);
+    arr->push_back(b1);
+    arr->set(0, b2);
 
-            t_false(arr0->equals(arr1));
-            t_false(arr1->equals(arr0));
+    t_true(arr->get(0) == b2);
+    t_true(b2 == arr->get(0));
 
-            delete arr0;
-            delete arr1;
+    delete arr;
+    OK("ArrayTest.setReplacesObjectBool");
+  }
 
-            OK("ArrayTest.equalsWorksInOrderBool");
-        }
+  void indexOfFindsObjectBool() {
+    BoolArray* arr = new BoolArray();
+    bool b1 = true;
+
+    // fix miswritten test
+    arr->push_back(false);
+    arr->push_back(false);
+    arr->push_back(false);
+    arr->push_back(false);
+    // end fix
+    arr->push_back(b1);
+
+    t_true(arr->index_of(b1) == 4);
+
+    delete arr;
+    OK("ArrayTest.indexOfFindsObjectBool");
+  }
+
+  void indexOfReturnsSizeWhenMissingBool() {
+    BoolArray* arr = new BoolArray();
+    bool b1 = true;
+
+    t_true(arr->index_of(b1) == arr->size());
+
+    delete arr;
+    OK("ArrayTest.indexOfReturnsSizeWhenMissingBool");
+  }
+
+  void equalsWorksInOrderBool() {
+    BoolArray* arr0 = new BoolArray();
+    BoolArray* arr1 = new BoolArray();
+
+    bool b1 = true;
+    bool b2 = false;
+
+    arr0->push_back(b1);
+    arr0->push_back(b2);
+
+    arr1->push_back(b1);
+    arr1->push_back(b2);
+
+    t_true(arr0->equals(arr1));
+    t_true(arr1->equals(arr0));
+    t_true(arr1->hash() == arr0->hash());
+
+    delete arr0;
+    delete arr1;
+
+    OK("ArrayTest.equalsWorksInOrderBool");
+  }
+
+  void equalsWorksOutOfOrderBool() {
+    BoolArray* arr0 = new BoolArray();
+    BoolArray* arr1 = new BoolArray();
+
+    String* str0 = new String("HI");
+    String* str1 = new String("BYE");
+
+    bool b1 = true;
+    bool b2 = false;
+
+    arr0->push_back(b1);
+    arr0->push_back(b2);
+
+    arr1->push_back(b2);
+    arr1->push_back(b1);
+
+    t_false(arr0->equals(arr1));
+    t_false(arr1->equals(arr0));
+
+    delete arr0;
+    delete arr1;
+
+    OK("ArrayTest.equalsWorksInOrderBool");
+  }
+
+  void arrayStressTestBool() {
+    BoolArray* arr0 = new BoolArray();
+
+    // Testing push_back
+    for (int i = 0; i < _stressTestVal; i++) {
+      arr0->push_back(true);
+    }
+
+    // Testing get
+    t_true(arr0->size() == _stressTestVal);
+    t_true(arr0->get(38) == true);
+
+    // Testing set
+    arr0->set(38, false);
+    t_true(arr0->get(38) == false);
+
+    // Testing index_of
+    t_true(arr0->index_of(true) == 0);
+    t_true(arr0->index_of(false) == 38);
+
+    delete arr0;
+
+    OK("ArrayTest.arrayStressTestBool");
+  }
 };
