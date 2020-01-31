@@ -1,4 +1,4 @@
-#include "tests/array_test.h"
+#include "array_test.h"
 
 int main() {
     ArrayTest arrayTest;
