@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../array.h"
-#include "../object.h"
-#include "../string.h"
+#include "array.h"
+#include "object.h"
+#include "string.h"
 #include "test_template.h"
 #include "test_util.h"
 
